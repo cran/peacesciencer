@@ -73,7 +73,7 @@ NULL
 #'
 #' Marshall, Monty G., Ted Robert Gurr, and Keith Jaggers. 2017. "Polity IV Project: Political Regime CHaracteristics and Transitions, 1800-2017." Center for Systemic Peace.
 #'
-#' Marquez, Xavier, "A Quick Method for Extending the Unified Democracy Scores" (March 23, 2016). \url{http://dx.doi.org/10.2139/ssrn.2753830}
+#' Marquez, Xavier, "A Quick Method for Extending the Unified Democracy Scores" (March 23, 2016). \doi{10.2139/ssrn.2753830}
 #'
 #' Pemstein, Daniel, Stephen Meserve, and James Melton. 2010. Democratic Compromise: A Latent Variable Analysis of Ten Measures of Regime Type. Political Analysis 18 (4): 426-449.
 #'
@@ -327,7 +327,7 @@ NULL
 #' @details Data originally provided by Gleditsch with no column names. Column names were added before some light re-cleaning in order
 #' to generate these data.
 #'
-#' @references \url{http://ksgleditsch.com/data-4.html}
+#' @references Gleditsch, Kristian S. and Michael D. Ward. 1999. "A Revised List of Independent States since the Congress of Vienna" 25(4): 393--413.
 #'
 "gw_states"
 
@@ -395,3 +395,161 @@ NULL
 #' Singer, J. David. 1987. "Reconstructing the Correlates of War Dataset on Material Capabilities of States, 1816-1985" International Interactions, 14: 115-32.
 #'
 "cow_nmc"
+
+
+#' Citations for Data/Functions Used in \code{peacesciencer}
+#'
+#' This is a master list of references for data/functions used in this package. Do check it out to make sure you're faithfully citing what you're using.
+#'
+#' @format A data frame with two variables:
+#' \describe{
+#' \item{\code{data_function}}{the data or function used or referenced in the package}
+#' \item{\code{citation}}{an appropriate (text) citation you should include in your manuscript}
+#' }
+#'
+"citations"
+
+#' Correlates of War Non-Directed Dyad-Year International Governmental Organizations (IGOs) Data
+#'
+#' This is a non-directed dyad-year version of the Correlates of War IGOs data. I use it internally for merging IGOs data into dyad-year data.
+#'
+#' @format A data frame with 917695 observations on the following 4 variables.
+#' \describe{
+#' \item{\code{ccode1}}{the Correlates of War state system code for the first state}
+#' \item{\code{ccode2}}{the Correlates of War state system code for the second state}
+#' \item{\code{year}}{the year}
+#' \item{\code{dyadigos}}{the sum of mutual IGOs for which each state appears as a full member in a given year}
+#' }
+#'
+#' @details The \code{data-raw} directory on the project's Github contains additional information about how these data were generated from the otherwise
+#' enormous dyad-year IGOs data provided by the Correlates of War project. Given the size of that data, and the size limitations of R packages for CRAN,
+#' the data I provide here can only be simpler summaries. If you want specifics, you'll need to consult the underlying raw data provided on the Correlates
+#' of War project.
+#'
+#' @references
+#'
+#' Pevehouse, Jon C.W., Timothy Nordstron, Roseanne W McManus, Anne Spencer Jamison, “Tracking Organizations in the World: The Correlates of War IGO Version 3.0 datasets”, Journal of Peace Research 57(3): 492-503.
+#'
+#' Wallace, Michael, and J. David Singer. 1970. "International Governmental Organization in the Global System, 1815-1964." International Organization 24: 239-87.
+#'
+"cow_igo_ndy"
+
+#' Correlates of War State-Year International Governmental Organizations (IGOs) Data
+#'
+#' This is a state-year version of the Correlates of War IGOs data. I use it internally for merging IGOs data into state-year data.
+#'
+#' @format A data frame with 1557 observations on the following 5 variables.
+#' \describe{
+#' \item{\code{ccode}}{the Correlates of War state system code for the state}
+#' \item{\code{year}}{the year}
+#' \item{\code{sum_igo_full}}{the sum of IGOs for which the state is a full member in a given year}
+#' \item{\code{sum_igo_associate}}{the sum of IGOs for which the state is just an associate member in a given year}
+#' \item{\code{sum_igo_observer}}{the sum of IGOs for which the state is just an observer in a given year}
+#' \item{\code{sum_igo_anytype}}{the sum of IGOs for which the state is a member of any kind in a given year.}
+#' }
+#'
+#' @details The \code{data-raw} directory on the project's Github contains additional information about how these data were generated from the otherwise
+#' enormous dyad-year IGOs data provided by the Correlates of War project. Given the size of that data, and the size limitations of R packages for CRAN,
+#' the data I provide here can only be simpler summaries. If you want specifics, you'll need to consult the underlying raw data provided on the Correlates
+#' of War project.
+#'
+#' @references
+#'
+#' Pevehouse, Jon C.W., Timothy Nordstron, Roseanne W McManus, Anne Spencer Jamison, “Tracking Organizations in the World: The Correlates of War IGO Version 3.0 datasets”, Journal of Peace Research 57(3): 492-503.
+#'
+#' Wallace, Michael, and J. David Singer. 1970. "International Governmental Organization in the Global System, 1815-1964." International Organization 24: 239-87.
+#'
+"cow_igo_sy"
+
+#' The Minimum Distance Between States in the Correlates of War System, 1946-2015
+#'
+#' These are non-directed dyad-year data for the minimum distance between states in the Correlates of War state system from
+#' 1946 to 2015. The data are generated from the \code{cshapes} package.
+#'
+#' @format A data frame with 817053 observations on the following 4 variables.
+#' \describe{
+#' \item{\code{ccode1}}{the Correlates of War state system code for the first state}
+#' \item{\code{ccode2}}{the Correlates of War state system code for the second state}
+#' \item{\code{year}}{the year}
+#' \item{\code{mindist}}{the minimum distance between states on Dec. 31 of the year, in kilometers}
+#' }
+#'
+#' @details The data are generated from the \code{cshapes} package. The package authors purport that the data
+#' are generated to be compatible with Correlates of War system codes, but a review I did several years ago for
+#' an unrelated project (published in 2017 in \emph{Conflict Management & Peace Science}, which you should cite for
+#' all your articles if you're reading this) suggested the output does not seem to perfectly meet that billing. These
+#' included oddball cases like Zanzibar, United Arab Republic, Comoros, East Germany, and a few others. I pre-process
+#' these as outlined in the associated file in the \code{data-raw} directory on the project's Github.
+#'
+#' Data are automatically generated (by default) as directed dyad-years. I elect to make them non-directed for space
+#' considerations. Making non-directed dyad-year data into directed dyad-year data isn't too difficult in R. It just
+#' looks weird to see the code that does it.
+#'
+#' Most of the data I prove elsewhere in this package are to be understood as the data as they were at the *start* of
+#' the year. This is how I process, for example, the \code{capitals} data as they get merged in the \code{add_capital_distance()}
+#' function. However, the script that generates these data are set at Dec. 31 of the year and not Jan. 1. I do this for concerns
+#' of maximizing data coverage. If you wanted the same effect, just lag the data a year.
+#'
+#' @references
+#'
+#' Weidmann, Nils B. and Kristian Skrede Gleditsch. 2010. "Mapping and Measuring Country Shapes: The \code{cshapes} Package." \emph{The R Journal} 2(1): 18-24
+
+"cow_mindist"
+
+#' The Minimum Distance Between States in the Gleditsch-Ward System, 1946-2015
+#'
+#' These are non-directed dyad-year data for the minimum distance between states in the Gleditsch-Ward state system from
+#' 1946 to 2015. The data are generated from the \code{cshapes} package.
+#'
+#' @format A data frame with 868813 observations on the following 4 variables.
+#' \describe{
+#' \item{\code{gwcode1}}{the Gleditsch-Ward state system code for the first state}
+#' \item{\code{gwcode2}}{the Gleditsch-Ward state system code for the second state}
+#' \item{\code{year}}{the year}
+#' \item{\code{mindist}}{the minimum distance between states on Dec. 31 of the year, in kilometers}
+#' }
+#'
+#' @details The data are generated from the \code{cshapes} package. The package authors purport that the data
+#' are generated to be compatible with the Gleditsch-Ward system. I trust them on this; indeed, Gleditsch is one of the
+#' authors of the \code{cshapes} package. However, I'm not sure how exhaustive the coverage is. For example,
+#' Tibet is missing in these data and it should not be. I do not use Gleditsch-Ward codes for my own research, so my
+#' quality control here for functions using these data will be minimal. I can only confirm there are no duplicates in the
+#' data.
+#'
+#' Data are automatically generated (by default) as directed dyad-years. I elect to make them non-directed for space
+#' considerations. Making non-directed dyad-year data into directed dyad-year data isn't too difficult in R. It just
+#' looks weird to see the code that does it.
+#'
+#' Most of the data I prove elsewhere in this package are to be understood as the data as they were at the *start* of
+#' the year. This is how I process, for example, the \code{capitals} data as they get merged in the \code{add_capital_distance()}
+#' function. However, the script that generates these data are set at Dec. 31 of the year and not Jan. 1. I do this for concerns
+#' of maximizing data coverage. If you wanted the same effect, just lag the data a year.
+#'
+#' @references
+#'
+#' Weidmann, Nils B. and Kristian Skrede Gleditsch. 2010. "Mapping and Measuring Country Shapes: The \code{cshapes} Package." \emph{The R Journal} 2(1): 18-24
+
+"gw_mindist"
+
+#' Correlates of War National Trade Data Set (v. 4.0)
+#'
+#' These are state-year-level data for national trade from the Correlates of War project.
+#'
+#'
+#' @format A data frame with 14410 on the following four variables.
+#' \describe{
+#' \item{\code{ccode}}{the Correlates of War state system code}
+#' \item{\code{year}}{the year}
+#' \item{\code{imports}}{total imports of the state in current million USD}
+#' \item{\code{exports}}{total exports of the state in current million USD}
+#' }
+#'
+#' @details The \code{data-raw} directory on the project's Github shows how the data were processed.
+#'
+#' @references
+#'
+#' Barbieri, Katherine and Omar M.G. Keshk. 2016. Correlates of War Project Trade Data Set Cdebook, Version 4.0. Online: \url{https://correlatesofwar.org}
+#'
+#' Barbieri, Katherine, Omar M.G. Keshk, and Brian Pollins. 2009. "TRADING DATA: Evaluating Our Assumptions and Coding Rules." \emph{Conflict Management and Peace Science}, 26(5): 471-491.
+#'
+"cow_trade_sy"

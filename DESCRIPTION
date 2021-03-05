@@ -1,7 +1,7 @@
 Package: peacesciencer
 Type: Package
 Title: Various Tools and Data for Quantitative Peace Science
-Version: 0.1.0
+Version: 0.2.0
 Depends: R (>= 3.5.0)
 Authors@R: person("Steve", "Miller",
                   email = "steven.v.miller@gmail.com", 
@@ -22,11 +22,10 @@ LazyData: true
 RoxygenNote: 7.1.1
 URL: https://github.com/svmiller/peacesciencer
 BugReports: https://github.com/svmiller/peacesciencer/issues/
-Imports: lubridate, magrittr, dplyr, tibble, geosphere, countrycode,
-        tidyr, stringr, rlang
-Suggests: testthat
+Imports: lubridate, magrittr, dplyr, geosphere, tidyr, stringr, rlang
+Suggests: countrycode, tibble, testthat
 NeedsCompilation: no
-Packaged: 2020-12-16 18:57:00 UTC; steve
+Packaged: 2021-03-05 15:14:47 UTC; steve
 Author: Steve Miller [aut, cre] (<https://orcid.org/0000-0003-4072-6263>)
 Repository: CRAN
-Date/Publication: 2020-12-19 11:00:02 UTC
+Date/Publication: 2021-03-05 15:40:02 UTC
