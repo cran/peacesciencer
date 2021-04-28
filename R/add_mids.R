@@ -33,7 +33,8 @@
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
+#' # just call `library(tidyverse)` at the top of the your script
 #' library(magrittr)
 #' cow_ddy %>% add_mids()
 #'
@@ -44,11 +45,15 @@
 
 
 add_mids <- function(data, keep) {
-  # require(dplyr)
-  # require(magrittr)
-  # require(tidyr)
 
   if (length(attributes(data)$ps_data_type) > 0 && attributes(data)$ps_data_type == "dyad_year") {
+
+    if (!all(i <- c("ccode1", "ccode2") %in% colnames(data))) {
+
+      stop("add_mids() merges on two Correlates of War codes (ccode1, ccode2), which your data don't have right now. Make sure to run create_dyadyears() at the top of the pipe. You'll want the default option, which returns Correlates of War codes.")
+
+
+    } else {
 
     gml_dirdisp %>%
       group_by(.data$ccode1, .data$ccode2, .data$year)  %>%
@@ -108,6 +113,10 @@ add_mids <- function(data, keep) {
     dirdisp %>%
       left_join(data, .) %>%
       mutate_at(vars("midongoing", "midonset"), ~ifelse(is.na(.), 0, .)) -> data
+
+    return(data)
+
+    }
 
 
 

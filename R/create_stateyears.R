@@ -25,9 +25,6 @@
 #' today. Use with some care.
 #'
 #' @examples
-#' \dontrun{
-#' library(peacesciencer)
-#' library(magrittr)
 #'
 #' # CoW is default, will include years beyond 2016 (most recent CoW update)
 #' create_stateyears()
@@ -37,7 +34,6 @@
 #'
 #' # Gleditsch-Ward, don't include most recent years
 #' create_stateyears(system="gw", mry=FALSE)
-#' }
 #'
 #'
 create_stateyears <- function(system = "cow", mry = TRUE) {

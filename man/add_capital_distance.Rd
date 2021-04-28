@@ -32,10 +32,9 @@ of the proverbial pipe.
 }
 \examples{
 
-\dontrun{
+\donttest{
+# just call `library(tidyverse)` at the top of the your script
 library(magrittr)
-library(peacesciencer)
-
 cow_ddy \%>\% add_capital_distance()
 
 create_stateyears() \%>\% add_capital_distance()

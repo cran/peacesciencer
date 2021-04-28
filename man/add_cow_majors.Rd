@@ -28,12 +28,11 @@ of the proverbial pipe.
 }
 \examples{
 
-\dontrun{
+# just call `library(tidyverse)` at the top of the your script
 library(magrittr)
-library(peacesciencer)
 
 cow_ddy \%>\% add_cow_majors()
-}
+
 
 }
 \references{

@@ -40,6 +40,10 @@ devtools::install_github("svmiller/peacesciencer")
 The package is very much a work in progress. Right now, it has the
 following functions:
 
+-   `add_archigos()`: adds some summary variables from Archigos about
+    political leaders for state-year or dyad-year data.
+-   `add_atop_alliance()`: adds ATOP alliance information to dyad-year
+    data.
 -   `add_capital_distance()`: adds capital-to-capital distance (in
     kilometers, “as the crow flies”) to dyad-year or state-year data.
 -   `add_contiguity()`: adds Correlates of War direct contiguity data to
@@ -58,8 +62,13 @@ following functions:
     Organizations (IGOs) data to dyad-year or state-year data.
 -   `add_mids():` adds dyad-year information about ongoing MIDs and MID
     onsets from the Gibler-Miller-Little data.
+-   `add_minimum_distance()`: adds minimum distance (in kilometers) to
+    dyad-year or state-year data.
 -   `add_nmc()`: adds estimates of national material capabilities (from
     Correlates of War) to dyad-year or state-year data.
+-   `add_sdp_gdp()`: adds estimates of (gross and surplus) domestic
+    product and population size to dyad-year or state-year data
+-   `add_ucdp_onsets()`: adds UCDP onsets to state-year data
 -   `create_dyadyears()`: converts Correlates of War or Gleditsch-Ward
     state system membership data into dyad-year format
 -   `create_statedays()`: converts Correlates of War or Gleditsch-Ward
@@ -71,6 +80,9 @@ following functions:
 
 It also has the following data sets:
 
+-   `archigos`: an abbreviated version of the Archigos data, used
+    internally
+-   `atop_alliance:` directed dyad-year alliance data from ATOP
 -   `capitals`: a list of capitals and capital transitions for
     Correlates of War state system members
 -   `ccode_democracy`: Correlates of War state-year data with three
@@ -93,6 +105,8 @@ It also has the following data sets:
     states, in kilometers, in non-directed dyad-year format (1946-2015)
 -   `cow_nmc`: Correlates of War National Material Capabilities data
     (version 5.0)
+-   `cow_sdp_gdp`: (Surplus and Gross) Domestic Product for Correlates
+    of War States
 -   `cow_states`: Correlates of War state system membership data
     (version: 2016)
 -   `cow_trade_sy`: Correlates of War state-year trade data (version
@@ -103,9 +117,15 @@ It also has the following data sets:
     state system members
 -   `gw_mindist`: the minimum distance between Gleditsch-Ward states, in
     kilometers, in non-directed dyad-year format (1946-2015)
+-   `gw_sdp_gdp`: (Surplus and Gross) Domestic Product for Correlates of
+    War States
 -   `gw_states`: Gleditsch-Ward independent state system data
     (version: 2017)
 -   `maoz_powers`: Zeev Maoz’ global/regional power data.
+-   `ucdp_acd`: a (not quite) dyad-year and (not quite) state-year data
+    set on armed conflict episodes
+-   `ucdp_onsets`: a state-year data set of UCDP armed conflict
+    onsets/episodes.
 
 The workflow is going to look something like this. This is a
 “tidy”-friendly approach to a data-generating process in quantitative
@@ -116,7 +136,7 @@ state-year data. The dyad-year data are created with the
 `create_dyadyears()` function. It has a few optional parameters with
 hidden defaults. The user can specify what kind of state system
 (`system`) data they want to use—either Correlates of War (`"cow"`) or
-Gledtisch-Ward (`"gw"`), whether they want to extend the data to the
+Gleditsch-Ward (`"gw"`), whether they want to extend the data to the
 most recently concluded calendar year (`mry`) (i.e. Correlates of War
 state system membership data are current as of Dec. 31, 2016 and the
 script can extend that to the end of 2019), and whether the user wants
@@ -167,12 +187,20 @@ create_dyadyears() %>%
   add_nmc() %>%
   # add alliance data from Correlates of War
   add_cow_alliance() %>%
+  # add alliance data from ATOP
+  add_atop_alliance() %>%
+  # add minimum distance. No default, must specify "cow" or "gw"
+  add_minimum_distance(system = "cow") %>%
+  # add Archigos data
+  add_archigos() %>%
+  # add gross and surplus GDP data
+  add_sdp_gdp(system = "cow") %>%
   # you should probably filter to politically relevant dyads earlier than later...
   # Or not, it's your time and computer processor...
   filter_prd()
 ```
 
-    ## # A tibble: 2,063,670 x 75
+    ## # A tibble: 246,314 x 97
     ##    ccode1 ccode2  year gwcode1 gwcode2 dispnum midongoing midonset sidea1 sidea2
     ##     <dbl>  <dbl> <dbl>   <dbl>   <dbl>   <dbl>      <dbl>    <dbl>  <dbl>  <dbl>
     ##  1      2     20  1920       2      20      NA          0        0     NA     NA
@@ -185,7 +213,7 @@ create_dyadyears() %>%
     ##  8      2     20  1927       2      20      NA          0        0     NA     NA
     ##  9      2     20  1928       2      20      NA          0        0     NA     NA
     ## 10      2     20  1929       2      20      NA          0        0     NA     NA
-    ## # … with 2,063,660 more rows, and 65 more variables: revstate1 <dbl>,
+    ## # … with 246,304 more rows, and 87 more variables: revstate1 <dbl>,
     ## #   revstate2 <dbl>, revtype11 <dbl>, revtype12 <dbl>, revtype21 <dbl>,
     ## #   revtype22 <dbl>, fatality1 <dbl>, fatality2 <dbl>, fatalpre1 <dbl>,
     ## #   fatalpre2 <dbl>, hiact1 <dbl>, hiact2 <dbl>, hostlev1 <dbl>,
@@ -199,14 +227,20 @@ create_dyadyears() %>%
     ## #   dyadigos <dbl>, milex1 <dbl>, milper1 <dbl>, irst1 <dbl>, pec1 <dbl>,
     ## #   tpop1 <dbl>, upop1 <dbl>, cinc1 <dbl>, milex2 <dbl>, milper2 <dbl>,
     ## #   irst2 <dbl>, pec2 <dbl>, tpop2 <dbl>, upop2 <dbl>, cinc2 <dbl>,
-    ## #   defense <dbl>, neutrality <dbl>, nonaggression <dbl>, entente <dbl>,
-    ## #   prd <dbl>
+    ## #   cow_defense <dbl>, cow_neutral <dbl>, cow_nonagg <dbl>, cow_entente <dbl>,
+    ## #   atop_defense <dbl>, atop_offense <dbl>, atop_neutral <dbl>,
+    ## #   atop_nonagg <dbl>, atop_consul <dbl>, mindist <dbl>,
+    ## #   leadertransition1 <dbl>, irregular1 <dbl>, n_leaders1 <int>,
+    ## #   jan1leadid1 <chr>, dec31leadid1 <chr>, leadertransition2 <dbl>,
+    ## #   irregular2 <dbl>, n_leaders2 <int>, jan1leadid2 <chr>, dec31leadid2 <chr>,
+    ## #   wbgdp2011est1 <dbl>, wbpopest1 <dbl>, sdpest1 <dbl>, wbgdp2011est2 <dbl>,
+    ## #   wbpopest2 <dbl>, sdpest2 <dbl>, prd <dbl>
 
 ``` r
 toc()
 ```
 
-    ## 31.857 sec elapsed
+    ## 44.99 sec elapsed
 
 ``` r
 # state-years now...
@@ -214,36 +248,44 @@ toc()
 tic()
 create_stateyears() %>%
   add_gwcode_to_cow() %>%
+  add_ucdp_onsets() %>%
   add_capital_distance() %>%
   add_contiguity() %>%
   add_cow_majors() %>%
   add_cow_trade() %>%
   add_democracy() %>%
   add_igos() %>%
-  add_nmc()
+  add_minimum_distance(system = "cow") %>%
+  add_archigos() %>%
+  add_nmc() %>%
+  add_sdp_gdp(system = "cow") 
 ```
 
-    ## # A tibble: 16,731 x 24
-    ##    ccode statenme  year gwcode mincapdist  land   sea cowmaj imports exports
-    ##    <dbl> <chr>    <dbl>  <dbl>      <dbl> <dbl> <dbl>  <dbl>   <dbl>   <dbl>
-    ##  1     2 United …  1816      2      5742.     0     0      0      NA      NA
-    ##  2     2 United …  1817      2      5742.     0     0      0      NA      NA
-    ##  3     2 United …  1818      2      5742.     0     0      0      NA      NA
-    ##  4     2 United …  1819      2      5742.     0     0      0      NA      NA
-    ##  5     2 United …  1820      2      5742.     0     0      0      NA      NA
-    ##  6     2 United …  1821      2      5742.     0     0      0      NA      NA
-    ##  7     2 United …  1822      2      5744.     0     0      0      NA      NA
-    ##  8     2 United …  1823      2      5744.     0     0      0      NA      NA
-    ##  9     2 United …  1824      2      5744.     0     0      0      NA      NA
-    ## 10     2 United …  1825      2      5744.     0     0      0      NA      NA
-    ## # … with 16,721 more rows, and 14 more variables: v2x_polyarchy <dbl>,
-    ## #   polity2 <dbl>, xm_qudsest <dbl>, sum_igo_full <dbl>,
-    ## #   sum_igo_associate <dbl>, sum_igo_observer <dbl>, sum_igo_anytype <dbl>,
-    ## #   milex <dbl>, milper <dbl>, irst <dbl>, pec <dbl>, tpop <dbl>, upop <dbl>,
-    ## #   cinc <dbl>
+    ## # A tibble: 16,731 x 39
+    ##    ccode statenme  year gwcode sumnewconf sumonset1 sumonset2 sumonset3
+    ##    <dbl> <chr>    <dbl>  <dbl>      <dbl>     <dbl>     <dbl>     <dbl>
+    ##  1     2 United …  1816      2          0         0         0         0
+    ##  2     2 United …  1817      2          0         0         0         0
+    ##  3     2 United …  1818      2          0         0         0         0
+    ##  4     2 United …  1819      2          0         0         0         0
+    ##  5     2 United …  1820      2          0         0         0         0
+    ##  6     2 United …  1821      2          0         0         0         0
+    ##  7     2 United …  1822      2          0         0         0         0
+    ##  8     2 United …  1823      2          0         0         0         0
+    ##  9     2 United …  1824      2          0         0         0         0
+    ## 10     2 United …  1825      2          0         0         0         0
+    ## # … with 16,721 more rows, and 31 more variables: sumonset5 <dbl>,
+    ## #   sumonset10 <dbl>, mincapdist <dbl>, land <dbl>, sea <dbl>, cowmaj <dbl>,
+    ## #   imports <dbl>, exports <dbl>, v2x_polyarchy <dbl>, polity2 <dbl>,
+    ## #   xm_qudsest <dbl>, sum_igo_full <dbl>, sum_igo_associate <dbl>,
+    ## #   sum_igo_observer <dbl>, sum_igo_anytype <dbl>, minmindist <dbl>,
+    ## #   leadertransition <dbl>, irregular <dbl>, n_leaders <int>, jan1leadid <chr>,
+    ## #   dec31leadid <chr>, milex <dbl>, milper <dbl>, irst <dbl>, pec <dbl>,
+    ## #   tpop <dbl>, upop <dbl>, cinc <dbl>, wbgdp2011est <dbl>, wbpopest <dbl>,
+    ## #   sdpest <dbl>
 
 ``` r
 toc()
 ```
 
-    ## 2.977 sec elapsed
+    ## 8.97 sec elapsed

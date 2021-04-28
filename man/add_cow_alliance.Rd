@@ -25,10 +25,11 @@ Duplicates in the original directed dyad-year alliance data were pre-processed. 
 }
 \examples{
 
-\dontrun{
+# just call `library(tidyverse)` at the top of the your script
 library(magrittr)
+
 cow_ddy \%>\% add_cow_alliance()
-}
+
 }
 \references{
 Gibler, Douglas M. 2009. \emph{International Military Alliances, 1648-2008}. Congressional Quarterly Press.

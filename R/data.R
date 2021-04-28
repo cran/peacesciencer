@@ -71,7 +71,7 @@ NULL
 #'
 #' Coppedge, Michael, John Gerring, Carl Henrik Knutsen, Staffan I. Lindberg, Jan Teorell, David Altman, Michael Bernhard, M. Steven Fish, Adam Glynn, Allen Hicken, Anna Luhrmann, Kyle L. Marquardt, Kelly McMann, Pamela Paxton, Daniel Pemstein, Brigitte Seim, Rachel Sigman, Svend-Erik Skaaning, Jeffrey Staton, Agnes Cornell, Lisa Gastaldi, Haakon Gjerløw, Valeriya Mechkova, Johannes von Römer, Aksel Sundtröm, Eitan Tzelgov, Luca Uberti, Yi-ting Wang, Tore Wig, and Daniel Ziblatt. 2020. ”V-Dem Codebook v10” Varieties of Democracy (V-Dem) Project.
 #'
-#' Marshall, Monty G., Ted Robert Gurr, and Keith Jaggers. 2017. "Polity IV Project: Political Regime CHaracteristics and Transitions, 1800-2017." Center for Systemic Peace.
+#' Marshall, Monty G., Ted Robert Gurr, and Keith Jaggers. 2017. "Polity IV Project: Political Regime Characteristics and Transitions, 1800-2017." Center for Systemic Peace.
 #'
 #' Marquez, Xavier, "A Quick Method for Extending the Unified Democracy Scores" (March 23, 2016). \doi{10.2139/ssrn.2753830}
 #'
@@ -90,10 +90,10 @@ NULL
 #' \item{\code{ccode1}}{a numeric vector for the Correlates of War state code for the first state}
 #' \item{\code{ccode2}}{a numeric vector for the Correlates of War state code for the second state}
 #' \item{\code{year}}{a numeric vector for the year}
-#' \item{\code{defense}}{a numeric vector that equals 1 if the alliance included a defense pledge}
-#' \item{\code{neutrality}}{a numeric vector that equals 1 if the alliance included a neutrality pledge}
-#' \item{\code{nonaggression}}{a numeric vector that equals 1 if the alliance included a non-aggression pledge}
-#' \item{\code{entente}}{a numeric vector that equals 1 if the alliance included a pledge to consult if a crisis occurred}
+#' \item{\code{cow_defense}}{a numeric vector that equals 1 if the alliance included a defense pledge}
+#' \item{\code{cow_neutral}}{a numeric vector that equals 1 if the alliance included a neutrality pledge}
+#' \item{\code{cow_nonagg}}{a numeric vector that equals 1 if the alliance included a non-aggression pledge}
+#' \item{\code{cow_entente}}{a numeric vector that equals 1 if the alliance included a pledge to consult if a crisis occurred}
 #' }
 #'
 #' @details The directed dyad-year alliance data are for alliance initiations, not straight dyad-years, "per se." This suggests
@@ -536,7 +536,7 @@ NULL
 #' These are state-year-level data for national trade from the Correlates of War project.
 #'
 #'
-#' @format A data frame with 14410 on the following four variables.
+#' @format A data frame with 14410 observations on the following four variables.
 #' \describe{
 #' \item{\code{ccode}}{the Correlates of War state system code}
 #' \item{\code{year}}{the year}
@@ -553,3 +553,177 @@ NULL
 #' Barbieri, Katherine, Omar M.G. Keshk, and Brian Pollins. 2009. "TRADING DATA: Evaluating Our Assumptions and Coding Rules." \emph{Conflict Management and Peace Science}, 26(5): 471-491.
 #'
 "cow_trade_sy"
+
+#' Alliance Treaty Obligations and Provisions (ATOP) Project Data (v. 5.0)
+#'
+#' These are directed dyad-year-level data for alliance obligations and provisions from the ATOP project
+#'
+#'
+#' @format A data frame with 272,046 observations on the following eight variables.
+#' \describe{
+#' \item{\code{ccode1}}{a numeric vector for the Correlates of War state code for the first state}
+#' \item{\code{ccode2}}{a numeric vector for the Correlates of War state code for the second state}
+#' \item{\code{year}}{a numeric vector for the year}
+#' \item{\code{atop_defense}}{a numeric vector that equals 1 if there was an alliance observed with a defense pledge}
+#' \item{\code{atop_offense}}{a numeric vector that equals 1 if there was an alliance observed with a offense pledge}
+#' \item{\code{atop_neutral}}{a numeric vector that equals 1 if there was an alliance observed with a neutrality pledge}
+#' \item{\code{atop_nonagg}}{a numeric vector that equals 1 if there was an alliance obeserved with a non-aggression pledge}
+#' \item{\code{atop_consul}}{a numeric vector that equals 1 if there was an alliance obeserved with a consultation pledge}
+#' }
+#' @details The \code{data-raw} directory on the project's Github shows how the data were processed.
+#'
+#' @references
+#'
+#' Leeds, Brett Ashley, Jeffrey M. Ritter, Sara McLaughlin Mitchell, and Andrew G. Long. 2002.
+#' Alliance Treaty Obligations and Provisions, 1815-1944. \emph{International Interactions} 28: 237-60.
+
+"atop_alliance"
+
+
+#' Archigos: A (Subset of a) Dataset on Political Leaders
+#'
+#' These are leader-level data drawn from the Archigos data. Space considerations mean I offer here just a few columns
+#' based on these data.
+#'
+#'
+#' @format A data frame with 3409 observations on the following seven variables.
+#' \describe{
+#' \item{\code{ccode}}{a numeric vector for the Correlates of War state code}
+#' \item{\code{leadid}}{the unique leader identifier}
+#' \item{\code{startdate}}{a date for the leader start date}
+#' \item{\code{enddate}}{a date for the leader end date}
+#' \item{\code{entry}}{a character vector for the leader's entry type}
+#' \item{\code{exit}}{a character vector for the leader's exit type}
+#' \item{\code{exitcode}}{a character vector for more information about the leader's exit type}
+#' }
+#' @details Space considerations mean I can only offer a few columns from the overall data. Archigos data are rich with information. Consult
+#' the raw data available on Hein Goeman's website for more. Data are version 4.1.
+#'
+#' @references
+#'
+#' Goemans, Henk E., Kristian Skrede Gleditsch, and Giacomo Chiozza. 2009. "Introducing Archigos: A Dataset of Political Leaders"
+#' \emph{Journal of Peace Research} 46(2): 269--83.
+
+"archigos"
+
+
+#' (Surplus and Gross) Domestic Product for Correlates of War States
+#'
+#' These are state-year level data for surplus and gross domestic product for Correlates of War state system members. Data also
+#' include population estimates for per capita standardization.
+#'
+#'
+#' @format A data frame with 27753 observations on the following five variables.
+#' \describe{
+#' \item{\code{ccode}}{a numeric vector for the Correlates of War state code}
+#' \item{\code{year}}{a numeric vector for the year}
+#' \item{\code{wbgdp2011est}}{a numeric vector for the estimated natural log of GDP in 2011 USD (log-transformed)}
+#' \item{\code{wbpopest}}{a numeric vector for the estimated population size (log-transformed)}
+#' \item{\code{sdpest}}{a numeric vector for the estimated surplus domestic product (log-transformed)}
+#' }
+#' @details These were extracted from the actual replication files from \emph{International Studies Quarterly}. Because these
+#' data are ultimately being simulated, a user can expect some slight differences between the Correlates of War version of these data
+#' (which Anders et al. published) and the Gleditsch-Ward version of these data (which appear to be the one the authors will more
+#' vigorously support going forward).
+#'
+#' @references
+#'
+#' Anders, Therese, Christopher J. Fariss, and Jonathan N. Markowitz. 2020. "Bread Before Guns or Butter: Introducing Surplus Domestic Product (SDP)"
+#' \emph{International Studies Quarterly} 64(2): 392--405.
+
+"cow_sdp_gdp"
+
+
+#' (Surplus and Gross) Domestic Product for Gleditsch-Ward States
+#'
+#' These are state-year level data for surplus and gross domestic product for Correlates of War state system members. Data also
+#' include population estimates for per capita standardization.
+#'
+#'
+#' @format A data frame with 27387 observations on the following five variables.
+#' \describe{
+#' \item{\code{gwcode}}{a numeric vector for the Gleditsch-Ward state code}
+#' \item{\code{year}}{a numeric vector for the year}
+#' \item{\code{wbgdp2011est}}{a numeric vector for the estimated natural log of GDP in 2011 USD (log-transformed)}
+#' \item{\code{wbpopest}}{a numeric vector for the estimated population size (log-transformed)}
+#' \item{\code{sdpest}}{a numeric vector for the estimated surplus domestic product (log-transformed)}
+#' }
+#' @details These were provided by Anders on a separate Github repository for this project. Because these
+#' data are ultimately being simulated, a user can expect some slight differences between the Correlates of War version of these data
+#' (which Anders et al. published) and the Gleditsch-Ward version of these data (which appear to be the one the authors will more
+#' vigorously support going forward).
+#'
+#' @references
+#'
+#' Anders, Therese, Christopher J. Fariss, and Jonathan N. Markowitz. 2020. "Bread Before Guns or Butter: Introducing Surplus Domestic Product (SDP)"
+#' \emph{International Studies Quarterly} 64(2): 392--405.
+
+"gw_sdp_gdp"
+
+#' UCDP Onset Data (v. 19.1)
+#'
+#' These are state-year level data for armed conflict onsets provided by the Uppsala Conflict Data Program (UCDP).
+#'
+#'
+#' @format A data frame with 10142 observations on the following eight variables.
+#' \describe{
+#' \item{\code{gwcode}}{a numeric vector for the Gleditsch-Ward state code}
+#' \item{\code{year}}{a numeric vector for the year}
+#' \item{\code{sumnewconf}}{a numeric vector for the sum of new conflicts/conflict-dyads}
+#' \item{\code{sumonset1}}{a numeric vector for the sum of new conflict episodes, whether because this is a new conflict or because there is more than one year since last conflict episode}
+#' \item{\code{sumonset2}}{a numeric vector for the sum of new conflict episodes, whether because this is a new conflict or because there is more than two years since last conflict episode}
+#' \item{\code{sumonset3}}{a numeric vector for the sum of new conflict episodes, whether because this is a new conflict or because there is more than three years since last conflict episode}
+#' \item{\code{sumonset5}}{a numeric vector for the sum of new conflict episodes, whether because this is a new conflict or because there is more than five years since last conflict episode}
+#' \item{\code{sumonset10}}{a numeric vector for the sum of new conflict episodes, whether because this is a new conflict or because there is more than 10 years since last conflict episode}
+#' }
+#' @details The user will want to note that the data provided by UCDP are technically not country-year observations. They instead duplicate observations for cases of new conflicts
+#' or new conflict episodes. Further, the original data do not provide any information about the conflict-dyad in question to which those duplicates pertain. That means the most
+#' these data can do for the package's mission is provide summary information. The user should probably recode these variables into something else they may want for a
+#' particular application
+#'
+#'
+#' @references
+#'
+#' Gleditsch, Nils Petter; Peter Wallensteen, Mikael Eriksson, Margareta Sollenberg & Håvard Strand (2002)
+#' Armed Conflict 1946–2001: A New Dataset. \emph{Journal of Peace Research} 39(5): 615–637.
+#'
+#' Pettersson, Therese; Stina Högbladh & Magnus Öberg (2019). Organized violence, 1989-2018 and peace
+#' agreements. Journal of Peace Research 56(4): 589-603.
+
+"ucdp_onsets"
+
+#' UCDP Armed Conflict Data (ACD) (v. 20.1)
+#'
+#' These are (kind of) dyadic, but mostly state-level data, used internally for doing stuff with the UCDP armed conflict data
+#'
+#'
+#' @format A data frame with 4164 observations on the following 15 variables.
+#' \describe{
+#' \item{\code{conflict_id}}{a conflict identifier, not to be confused with an episode identifier (which I don't think UCDP offers)}
+#' \item{\code{year}}{a numeric vector for the year}
+#' \item{\code{gwno_a}}{the Gleditsch-Ward state code for the state on side A of the armed conflict}
+#' \item{\code{gwno_a_2nd}}{the Gleditsch-Ward state code for the state that actively supported side A of the armed conflict with the use of troops}
+#' \item{\code{gwno_b}}{the Gleditsch-Ward state code for the actor on side B of the armed conflict}
+#' \item{\code{gwno_b_2nd}}{the Gleditsch-Ward state code for the state that actively supported side B of the armed conflict with the use of troops}
+#' \item{\code{incompatibility}}{a numeric vector for the main conflict issue (1 = territory, 2 = government, 3 = both)}
+#' \item{\code{intensity_level}}{a numeric vector for the intensity level in the calendar year (1 = minor (25-999 deaths), 2 = war (>1,000 deaths))}
+#' \item{\code{type_of_conflict}}{a numeric vector for the type of conflict (1 = extrasystemic, 2 = inter-state, 3 = intra-state, 4 = internationalized intra-state)}
+#' \item{\code{start_date}}{a date of the first battle-related death in the conflict, not to be confused with the first battle-related death of the episode}
+#' \item{\code{start_prec}}{the level of precision for \code{start_date}}
+#' \item{\code{start_date2}}{a date of the first battle-related death in the episode, not to be confused with the first battle-related death of the conflict}
+#' \item{\code{start_prec2}}{the level of precision for \code{start_date2}}
+#' \item{\code{ep_end}}{a dummy variable for whether the conflict episode ended in the calendar year of observation}
+#' \item{\code{ep_end_date}}{the episode end date, if applicable}
+#' }
+#' @details The \code{data-raw} directory on the project's Github will show how I processed the multiple strings for when there are multiple states on a given side.
+#'
+#'
+#' @references
+#'
+#' Gleditsch, Nils Petter; Peter Wallensteen, Mikael Eriksson, Margareta Sollenberg & Håvard Strand (2002)
+#' Armed Conflict 1946–2001: A New Dataset. \emph{Journal of Peace Research} 39(5): 615–637.
+#'
+#' Pettersson, Therese; Stina Högbladh & Magnus Öberg (2019). Organized violence, 1989-2018 and peace
+#' agreements. Journal of Peace Research 56(4): 589-603.
+
+"ucdp_acd"

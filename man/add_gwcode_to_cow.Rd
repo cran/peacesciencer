@@ -30,15 +30,13 @@ the \code{countrycode} package. Whether you use this function or the \code{count
 the output.
 }
 \examples{
-\dontrun{
+# just call `library(tidyverse)` at the top of the your script
 library(magrittr)
-library(peacesciencer)
-
 
 cow_ddy \%>\% add_gwcode_to_cow()
 
 create_stateyears() \%>\% add_gwcode_to_cow()
-}
+
 
 }
 \author{

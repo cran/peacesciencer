@@ -36,9 +36,9 @@ duplicates in the returned output.
 }
 \examples{
 
-\dontrun{
+\donttest{
+# just call `library(tidyverse)` at the top of the your script
 library(magrittr)
-library(peacesciencer)
 
 cow_ddy \%>\% add_contiguity()
 
