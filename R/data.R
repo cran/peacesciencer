@@ -146,9 +146,11 @@ NULL
 #' A directed dyad-year data frame of Correlates of War state system members
 #'
 #' This is a complete directed dyad-year data frame of Correlates of War
-#' state system members. I offer it here as a shortcut for various other functions.
+#' state system members. I offer it here as a shortcut for various other functions when
+#' I am working on new additions and don't want to invest time in waiting for
+#' \code{create_dyadyears()} to run.
 #'
-#' @format A data frame with 2025840 observations on the following 4 variables.
+#' @format A data frame with 2063670 observations on the following 3 variables.
 #' \describe{
 #' \item{\code{ccode1}}{a numeric vector for the Correlates of War state code for the first state}
 #' \item{\code{ccode2}}{a numeric vector for the Correlates of War state code for the second state}
@@ -160,26 +162,26 @@ NULL
 "cow_ddy"
 
 
-#' Correlates of War and Gleditsch-War states, by year
+#' Correlates of War and Gleditsch-Ward states, by year
 #'
 #' This is a complete (I believe) data set on Correlates of War states and Gleditsch-Ward states, a byproduct
 #' of a \code{full_join()} between \code{gw_states} and \code{cow_states} that leans largely on the
-#' state abbreviation variable
+#' state abbreviation variable.
 #'
-#' @format A data frame with 18656 observations on the following 8 variables.
+#' @format A data frame with 16936 observations on the following 6 variables.
 #' \describe{
-#' \item{\code{stateabb}}{the state abbreviation, which was the greatest source of agreement between both data sets}
-#' \item{\code{year}}{a numeric vector for the year}
 #' \item{\code{gwcode}}{a Gleditsch-Ward state code}
-#' \item{\code{ccode}}{a Correlates of War state code}
+#' \item{\code{stateabb}}{the state abbreviation, which was the greatest source of agreement between both data sets}
 #' \item{\code{gw_statename}}{the state name as it appears in the Gleditsch-Ward data}
+#' \item{\code{ccode}}{a Correlates of War state code}
 #' \item{\code{cow_statename}}{the state name as it appears in the Correlates of War data}
+#' \item{\code{year}}{a numeric vector for the year}
 #' }
 #'
 #' @details The \code{data-raw} directory on the project's Github contains more information about how these data were
 #' created. I'm going to use it for internal stuff. The workflow is going to treat the Correlates of War state system
 #' membership codes as more of the "master" codes, for which the user can add Gleditsch-Ward identifiers as they see
-#' fit.
+#' fit. Data are extended to 2020, assuming no changes to state system membership for either data set.
 #'
 "cow_gw_years"
 
@@ -327,7 +329,7 @@ NULL
 #' @details Data originally provided by Gleditsch with no column names. Column names were added before some light re-cleaning in order
 #' to generate these data.
 #'
-#' @references Gleditsch, Kristian S. and Michael D. Ward. 1999. "A Revised List of Independent States since the Congress of Vienna" 25(4): 393--413.
+#' @references Gleditsch, Kristian S. and Michael D. Ward. 1999. "A Revised List of Independent States since the Congress of Vienna" International Interactions 25(4): 393--413.
 #'
 "gw_states"
 
@@ -397,18 +399,6 @@ NULL
 "cow_nmc"
 
 
-#' Citations for Data/Functions Used in \code{peacesciencer}
-#'
-#' This is a master list of references for data/functions used in this package. Do check it out to make sure you're faithfully citing what you're using.
-#'
-#' @format A data frame with two variables:
-#' \describe{
-#' \item{\code{data_function}}{the data or function used or referenced in the package}
-#' \item{\code{citation}}{an appropriate (text) citation you should include in your manuscript}
-#' }
-#'
-"citations"
-
 #' Correlates of War Non-Directed Dyad-Year International Governmental Organizations (IGOs) Data
 #'
 #' This is a non-directed dyad-year version of the Correlates of War IGOs data. I use it internally for merging IGOs data into dyad-year data.
@@ -428,7 +418,7 @@ NULL
 #'
 #' @references
 #'
-#' Pevehouse, Jon C.W., Timothy Nordstron, Roseanne W McManus, Anne Spencer Jamison, “Tracking Organizations in the World: The Correlates of War IGO Version 3.0 datasets”, Journal of Peace Research 57(3): 492-503.
+#' Pevehouse, Jon C.W., Timothy Nordstrom, Roseanne W McManus, Anne Spencer Jamison, 2020. “Tracking Organizations in the World: The Correlates of War IGO Version 3.0 datasets”, Journal of Peace Research 57(3): 492-503.
 #'
 #' Wallace, Michael, and J. David Singer. 1970. "International Governmental Organization in the Global System, 1815-1964." International Organization 24: 239-87.
 #'
@@ -455,7 +445,7 @@ NULL
 #'
 #' @references
 #'
-#' Pevehouse, Jon C.W., Timothy Nordstron, Roseanne W McManus, Anne Spencer Jamison, “Tracking Organizations in the World: The Correlates of War IGO Version 3.0 datasets”, Journal of Peace Research 57(3): 492-503.
+#' Pevehouse, Jon C.W., Timothy Nordstrom, Roseanne W McManus, Anne Spencer Jamison. 2020. “Tracking Organizations in the World: The Correlates of War IGO Version 3.0 datasets”, Journal of Peace Research 57(3): 492-503.
 #'
 #' Wallace, Michael, and J. David Singer. 1970. "International Governmental Organization in the Global System, 1815-1964." International Organization 24: 239-87.
 #'
@@ -554,6 +544,33 @@ NULL
 #'
 "cow_trade_sy"
 
+
+#' Correlates of War Dyadic Trade Data Set (v. 4.0)
+#'
+#' These are dyad-year-level data for national trade from the Correlates of War project.
+#'
+#'
+#' @format A data frame with 673654 observations on the following seven variables.
+#' \describe{
+#' \item{\code{ccode1}}{a numeric vector for the Correlates of War state code for the first state}
+#' \item{\code{ccode2}}{a numeric vector for the Correlates of War state code for the second state}
+#' \item{\code{year}}{the year}
+#' \item{\code{flow1}}{imports of \code{ccode1} from \code{ccode2}, in current million USD}
+#' \item{\code{flow2}}{imports of \code{ccode2} from \code{ccode1}, in current million USD}
+#' \item{\code{smoothflow1}}{smoothed \code{flow1} values}
+#' \item{\code{smoothflow2}}{smoothed \code{flow2} values}
+#' }
+#'
+#' @details The \code{data-raw} directory on the project's Github shows how the data were processed.
+#'
+#' @references
+#'
+#' Barbieri, Katherine and Omar M.G. Keshk. 2016. Correlates of War Project Trade Data Set Codebook, Version 4.0. Online: \url{https://correlatesofwar.org}
+#'
+#' Barbieri, Katherine, Omar M.G. Keshk, and Brian Pollins. 2009. "TRADING DATA: Evaluating Our Assumptions and Coding Rules." \emph{Conflict Management and Peace Science}, 26(5): 471-491.
+#'
+"cow_trade_ndy"
+
 #' Alliance Treaty Obligations and Provisions (ATOP) Project Data (v. 5.0)
 #'
 #' These are directed dyad-year-level data for alliance obligations and provisions from the ATOP project
@@ -620,6 +637,7 @@ NULL
 #' \item{\code{wbgdp2011est}}{a numeric vector for the estimated natural log of GDP in 2011 USD (log-transformed)}
 #' \item{\code{wbpopest}}{a numeric vector for the estimated population size (log-transformed)}
 #' \item{\code{sdpest}}{a numeric vector for the estimated surplus domestic product (log-transformed)}
+#'  \item{\code{wbgdppc2011est}}{a numeric vector for the estimated GDP per capita (log-transformed)}
 #' }
 #' @details These were extracted from the actual replication files from \emph{International Studies Quarterly}. Because these
 #' data are ultimately being simulated, a user can expect some slight differences between the Correlates of War version of these data
@@ -647,6 +665,7 @@ NULL
 #' \item{\code{wbgdp2011est}}{a numeric vector for the estimated natural log of GDP in 2011 USD (log-transformed)}
 #' \item{\code{wbpopest}}{a numeric vector for the estimated population size (log-transformed)}
 #' \item{\code{sdpest}}{a numeric vector for the estimated surplus domestic product (log-transformed)}
+#' \item{\code{wbgdppc2011est}}{a numeric vector for the estimated GDP per capita (log-transformed)}
 #' }
 #' @details These were provided by Anders on a separate Github repository for this project. Because these
 #' data are ultimately being simulated, a user can expect some slight differences between the Correlates of War version of these data
@@ -705,9 +724,9 @@ NULL
 #' \item{\code{gwno_a_2nd}}{the Gleditsch-Ward state code for the state that actively supported side A of the armed conflict with the use of troops}
 #' \item{\code{gwno_b}}{the Gleditsch-Ward state code for the actor on side B of the armed conflict}
 #' \item{\code{gwno_b_2nd}}{the Gleditsch-Ward state code for the state that actively supported side B of the armed conflict with the use of troops}
-#' \item{\code{incompatibility}}{a numeric vector for the main conflict issue (1 = territory, 2 = government, 3 = both)}
+#' \item{\code{incompatibility}}{a character vector for the main conflict issue ("territory", "government", "both")}
 #' \item{\code{intensity_level}}{a numeric vector for the intensity level in the calendar year (1 = minor (25-999 deaths), 2 = war (>1,000 deaths))}
-#' \item{\code{type_of_conflict}}{a numeric vector for the type of conflict (1 = extrasystemic, 2 = inter-state, 3 = intra-state, 4 = internationalized intra-state)}
+#' \item{\code{type_of_conflict}}{a character vector for the type of conflict ("extrasystemic", "interstate", "intrastate", "II"). "II" is a simple abbreviation of "internationalized intrastate"}
 #' \item{\code{start_date}}{a date of the first battle-related death in the conflict, not to be confused with the first battle-related death of the episode}
 #' \item{\code{start_prec}}{the level of precision for \code{start_date}}
 #' \item{\code{start_date2}}{a date of the first battle-related death in the episode, not to be confused with the first battle-related death of the conflict}
@@ -874,7 +893,7 @@ NULL
 #'  Its primary aim here is merging into a dyad-year data frame.
 #'
 #'
-#' @format A data frame with 10234 observations on the following 25 variables.
+#' @format A data frame with 9262 observations on the following 25 variables.
 #' \describe{
 #' \item{\code{dispnum}}{a numeric vector for the dispute number}
 #' \item{\code{ccode1}}{a numeric vector for the focal state in the dyad}
@@ -917,3 +936,366 @@ NULL
 #' Interstate Dispute (MID) Dataset, 1816-2001.” International Studies Quarterly 60(4): 719-730.
 
 "gml_mid_ddydisps"
+
+
+
+
+
+#' Thompson and Dreyer's (2012) Strategic Rivalries, 1494-2010
+#'
+#' A simple summary of all strategic (inter-state) rivalries from Thompson and Dreyer (2012).
+#'
+#'
+#' @format A data frame with 197 observations on the following 10 variables.
+#' \describe{
+#'\item{\code{rivalryno}}{a numeric vector for the rivalry number}
+#'\item{\code{rivalryname}}{a character vector for the rivalry name}
+#'\item{\code{ccode1}}{the Correlates of War state code for the state with the lowest Correlates of War state code in the rivalry}
+#'\item{\code{ccode2}}{the Correlates of War state code for the state with the highest Correlates of War state code in the rivalry}
+#'\item{\code{styear}}{a numeric vector for the start year of the rivalry}
+#'\item{\code{endyear}}{a numeric vector for the end year of the rivalry}
+#'\item{\code{region}}{a character vector for the region of the rivalry, per Thompson and Dreyer (2012)}
+#'\item{\code{type1}}{a character vector for the primary type of the rivalry (spatial, positional, ideological, or interventionary)}
+#'\item{\code{type2}}{a character vector for the secondary type of the rivalry, if applicable (spatial, positional, ideological, or interventionary)}
+#' \item{\code{type3}}{a character vector for the tertiary type of the rivalry, if applicable (spatial, positional, ideological, or interventionary)}
+#' }
+#' @details Information gathered from the appendix of Thompson and Dreyer (2012). Ongoing rivalries are
+#' right-bound at 2010, the date of publication for Thompson and Dreyer's handbook. Users are free to change this if they like. Data are effectively
+#' identical to \code{strategic_rivalries} in \pkg{stevemisc}, but include some behind-the-scenes processing (described in a blog post on
+#' \url{http://svmiller.com}) that is available to see on the project's Github repository. The data object is also renamed to avoid a conflict.
+#'
+#' @references
+#'
+#' Miller, Steven V. 2019. "Create and Extend Strategic (International) Rivalry Data in R".
+#' URL: \url{http://svmiller.com/blog/2019/10/create-extend-strategic-rivalry-data-r/}
+#'
+#' Thompson, William R. and David Dreyer. 2012. \emph{Handbook of International Rivalries}. CQ Press.
+#'
+"td_rivalries"
+
+
+
+
+#' Gleditsch-Ward states and Correlates of War, by year
+#'
+#' This is a complete (I believe) data set on Gleditsch-Ward states and Correlates of War states, a byproduct
+#' of a \code{full_join()} between \code{gw_states} and \code{cow_states} that leans largely on the
+#' state abbreviation variable.
+#'
+#' @format A data frame with 18425 observations on the following 6 variables.
+#' \describe{
+#' \item{\code{gwcode}}{a Gleditsch-Ward state code}
+#' \item{\code{stateabb}}{the state abbreviation, which was the greatest source of agreement between both data sets}
+#' \item{\code{gw_statename}}{the state name as it appears in the Gleditsch-Ward data}
+#' \item{\code{ccode}}{a Correlates of War state code}
+#' \item{\code{cow_statename}}{the state name as it appears in the Correlates of War data}
+#' \item{\code{year}}{a numeric vector for the year}
+#' }
+#'
+#' @details The \code{data-raw} directory on the project's Github contains more information about how these data were
+#' created. I'm going to use it for internal stuff. The workflow is going to treat the Gleditsch-Ward state system
+#' membership codes as more of the "master" codes, for which the user can add Correlates of War identifiers as they see
+#' fit. Data are extended to 2020, assuming no changes to state system membership for either data set.
+#'
+"gw_cow_years"
+
+
+#' Rugged/Mountainous Terrain Data
+#'
+#' This is a data set on state-level estimates for the "ruggedness" of a state's terrain.
+#'
+#' @format A data frame with 192 observations on the following 6 variables.
+#' \describe{
+#' \item{\code{ccode}}{a Correlates of War state code}
+#' \item{\code{gwcode}}{a Gleditsch-Ward state code}
+#' \item{\code{rugged}}{the terrain ruggedness index}
+#' \item{\code{newlmtnest}}{the (natural log) percentage estimate of the state's terrain that is mountainous}
+#' }
+#'
+#' @details The \code{data-raw} directory on the project's Github contains more information about how these data were
+#' created. It goes without saying that these data move *slowly* so the data are really only applicable for making state-to-state
+#' comparisons and not states-in-time comparisons. The terrain ruggedness index is originally introduced by Riley et al. (1999) but
+#' is amended by Nunn and Puga (2012). The mountain terrain data was originally created by Fearon and Laitin (2003) but extended and
+#' amended by Gibler and Miller (2014). The data are functionally time-agnostic---use with caution in your state-year analyses---but all
+#' data sets seem to benchmark around 1999-2000. I'm not sure it matters  *that* much, but it matters a little at the margins, I suppose,
+#' if you suspect there are major differences in interpretation of how much more "rugged" the Soviet Union was than Russia, or Yugoslavia
+#' than Serbia.
+#'
+#' @references
+#'
+#' Fearon, James D., and David Laitin, "Ethnicity, Insurgency, and Civil War"
+#' \emph{American Political Science Review} 97: 75–90.
+#'
+#' Gibler, Douglas M. and Steven V. Miller. 2014. "External Territorial Threat, State Capacity, and Civil War."
+#' \emph{Journal of Peace Research} 51(5): 634-646.
+#'
+#' Nunn, Nathan and Diego Puga. 2012. "Ruggedness: The Blessing of Bad Geography in Africa."
+#' \emph{Review of Economics and Statistics}. 94(1): 20-36.
+#'
+#' Riley, Shawn J., Stephen D. DeGloria, and Robert Elliot. 1999. "A Terrain Ruggedness
+#' Index That Quantifies Topographic Heterogeneity,” \emph{Intermountain Journal of Sciences} 5: 23–27.
+#'
+"rugged"
+
+
+#' Historical Index of Ethnic Fractionalization data
+#'
+#' This is a data set with state-year estimates for ethnic fractionalization.
+#'
+#' @format A data frame with 8808 observations on the following 5 variables.
+#' \describe{
+#' \item{\code{ccode}}{a Correlates of War state code}
+#' \item{\code{gwcode}}{a Gleditsch-Ward state code}
+#' \item{\code{year}}{the year}
+#' \item{\code{efindex}}{a numeric vector for the estimate of ethnic fractionalization}
+#' }
+#'
+#' @details The \code{data-raw} directory on the project's Github contains more information about how these data were
+#' created.
+#'
+#' @references
+#'
+#' Drazanova, Lenka. 2020. "Introducing the Historical Index of Ethnic Fractionalization (HIEF) Dataset: Accounting
+#' for Longitudinal Changes in Ethnic Diversity." \emph{Journal of Open Humanities Data} 6:6
+#' \doi{10.5334/johd.16}
+#'
+"hief"
+
+
+#' Composition of Religious and Ethnic Groups (CREG) Fractionalization/Polarization Estimates
+#'
+#' This is a data set with state-year estimates for ethnic and religious fractionalization/polarization,
+#' by way of the Composition of Religious and Ethnic Groups (CREG) project at the
+#' University of Illinois. I-L-L.
+#'
+#' @format A data frame with 11523 observations on the following 9 variables.
+#' \describe{
+#' \item{\code{country}}{a character vector of the state name}
+#' \item{\code{ccode}}{a Correlates of War state code}
+#' \item{\code{gwcode}}{a Gleditsch-Ward state code}
+#' \item{\code{creg_ccode}}{a numeric code for the state, mostly patterned off Correlates of War codes but with important differences. See details section for more.}
+#' \item{\code{year}}{the year}
+#' \item{\code{ethfrac}}{an estimate of the ethnic fractionalization index. See details for more.}
+#' \item{\code{ethpol}}{an estimate of the ethnic polarization index. See details for more.}
+#' \item{\code{relfrac}}{an estimate of the religious fractionalization index. See details for more.}
+#' \item{\code{relpol}}{an estimate of the religious polarization index. See details for more.}
+#' }
+#'
+#' @details The \code{data-raw} directory on the project's Github contains more information about how these data were
+#' created. Pay careful attention to how I assigned CoW/G-W codes. The underlying data are version 1.02.
+#'
+#' The state codes provided by the CREG project are mostly Correlates of War codes, but with some differences.
+#' Summarizing these differences: the state code for Serbia from 1992 to 2013 is actually the Gleditsch-Ward code (340).
+#' Russia after the dissolution of the Soviet Union (1991-onward) is 393 and not 365. The Soviet Union has the 365 code.
+#' Yugoslavia has the 345 code. The code for Yemen (678) is effectively the Gleditsch-Ward code because it spans the entire
+#' post-World War II temporal domain. Likewise, the code for post-unification Germany is the Gleditsch-Ward code (260) as well.
+#' The codebook actually says it's 265 (which would be East Germany's code), but this is assuredly a typo based on the data.
+#'
+#' The codebook cautions there are insufficient data for ethnic group estimates for Cameroon, France, India,
+#' Kosovo, Montenegro, Mozambique, and Papua New Guinea. The French case is particularly disappointing but the
+#' missing data there are a function of both France's constitution and modelling issues for CREG (per the
+#' codebook). There are insufficient data to make religious group estimates for China, North Korea, and the
+#' short-lived Republic of Vietnam.
+#'
+#' The fractionalization estimates are the familiar Herfindahl-Hirschman concentration index. The polarization
+#' formula comes by way of Montalvo and Reynal-Querol (2000), though this book does not appear to be published
+#' beyond its placement online. I recommend Montalvo and Reynal-Querol (2005) instead.
+#' You can cite Alesina (2003) for the fractionalization measure if you'd like.
+#'
+#' In the most literal sense of "1", the group proportions may not sum to exactly 1 because of rounding in the
+#' data. There were only two problem cases in these data worth mentioning. First, in both data sets, there would
+#' be the occasional duplicates of group names by state-year (for example: Afghanistan in 1951 in the ethnic group
+#' data and the United States in 1948 in the religious group data). In those cases, the script I make available
+#' in the \code{data-raw} directory just select distinct values and that effectively fixes the problem of duplicates,
+#' where they do appear. Finally, Costa Rica had a curious problem for most years in the religious group data. All
+#' Costa Rica years have group data for Protestants, Roman Catholics, and "others." Up until 1964 or so, the "others"
+#' are zero. Afterward, there is some small proportion of "others". However, the sum of Protestants, Roman Catholics, and
+#' "others" exceeds 1 (pretty clearly) and the difference between the sum and 1 is entirely the "others." So, I drop
+#' the "others" for all years. I don't think that's terribly problematic, but it's worth saying that's what I did.
+#'
+#' @references
+#'
+#' Alesina, Alberto, Arnaud Devleeschauwer, William Easterly, Sergio Kurlat and Romain Wacziarg. 2003.
+#' "Fractionalization". \emph{Journal of Economic Growth} 8: 155-194.
+#'
+#' Montalvo, Jose G. and Marta Reynal-Querol. 2005. "Ethnic Polarization, Potential Conflict, and Civil Wars"
+#' \emph{American Economic Review} 95(3): 796--816.
+#'
+#' Nardulli, Peter F., Cara J. Wong, Ajay Singh, Buddy Petyon, and Joseph Bajjalieh. 2012.
+#' \emph{The Composition of Religious and Ethnic Groups (CREG) Project}. Cline Center for Democracy.
+#'
+"creg"
+
+
+
+#' Democracy data for all Gleditsch-Ward states
+#'
+#' These are democracy data for all Correlates of War state system members.
+#'
+#' @format A data frame with 18289 observations on the following 5 variables.
+#' \describe{
+#' \item{\code{gwcode}}{the Gleditsch-Ward system code}
+#' \item{\code{year}}{a numeric vector for the year}
+#' \item{\code{v2x_polyarchy}}{the Varieties of Democracy "polyarchy" estimate}
+#' \item{\code{polity2}}{the the \code{polity2} score from the Polity project}
+#' \item{\code{xm_qudsest}}{an extension of the Unified Democracy Scores (UDS) estimates, made possibly by the \code{QuickUDS} package from Xavier Marquez.}
+#' }
+#'
+#' @details Missing data connote data that are unavailable for various reasons. Either there is no democracy data to code or, in the case of the Polity project, the state
+#' system member is outright not evaluated for the variable.
+#'
+#' The Polity data are from 2017. The Varieties of Democracy data are version 10. Xavier Marquez' \code{QuickUDS} estimates (i.e. extensions of Pemstein et al. (2010)) come from a package Marquez makes available on his Github (\url{https://github.com/xmarquez/QuickUDS}).
+#'
+#' @references
+#'
+#' Coppedge, Michael, John Gerring, Carl Henrik Knutsen, Staffan I. Lindberg, Jan Teorell, David Altman, Michael Bernhard, M. Steven Fish, Adam Glynn, Allen Hicken, Anna Luhrmann, Kyle L. Marquardt, Kelly McMann, Pamela Paxton, Daniel Pemstein, Brigitte Seim, Rachel Sigman, Svend-Erik Skaaning, Jeffrey Staton, Agnes Cornell, Lisa Gastaldi, Haakon Gjerløw, Valeriya Mechkova, Johannes von Römer, Aksel Sundtröm, Eitan Tzelgov, Luca Uberti, Yi-ting Wang, Tore Wig, and Daniel Ziblatt. 2020. ”V-Dem Codebook v10” Varieties of Democracy (V-Dem) Project.
+#'
+#' Marshall, Monty G., Ted Robert Gurr, and Keith Jaggers. 2017. "Polity IV Project: Political Regime Characteristics and Transitions, 1800-2017." Center for Systemic Peace.
+#'
+#' Marquez, Xavier, "A Quick Method for Extending the Unified Democracy Scores" (March 23, 2016). \doi{10.2139/ssrn.2753830}
+#'
+#' Pemstein, Daniel, Stephen Meserve, and James Melton. 2010. Democratic Compromise: A Latent Variable Analysis of Ten Measures of Regime Type. Political Analysis 18 (4): 426-449.
+#'
+"gwcode_democracy"
+
+
+#' Correlates of War Intra-State War Data (v. 4.1)
+#'
+#' These are a modified version of the intra-state war data from the Correlates of War project. Data are version 4.1. The temporal domain is
+#' 1816-2007.
+#'
+#' @format A data frame with 1361 observations on the following 17 variables.
+#' \describe{
+#' \item{\code{warnum}}{the Correlates of War war number}
+#' \item{\code{warname}}{the Correlates of War war name}
+#' \item{\code{wartype}}{a character vector for the type of war, either "local issues" or "central control"}
+#' \item{\code{year}}{a numeric vector for the year}
+#' \item{\code{cowintraonset}}{a dummy variable for whether this is a civil war onset (i.e. either the year in \code{StartYear1} or \code{StartYear2} in the raw data)}
+#' \item{\code{cowintraongoing}}{a numeric constant of 1}
+#' \item{\code{resume_combat}}{a dummy variable for whether this is a resumption of a conflict (i.e. \code{StartYear2} is not -8)}
+#' \item{\code{primary_state}}{a dummy variable for whether the state is the primary state having the civil war}
+#' \item{\code{ccodea}}{the Correlates of War state code for the participant on Side A. -8 = not applicable (participant is not a state)}
+#' \item{\code{sidea}}{the name of the participant on Side A. -8 = not applicable (no additional party on this side)}
+#' \item{\code{ccodeb}}{the Correlates of War state code for the participant on Side B. -8 = not applicable (participant is not a state)}
+#' \item{\code{sideb}}{the name of the participant on Side B. -8 = not applicable (no additional party on this side)}
+#' \item{\code{intnl}}{a dummy variable for if this is an internationalized civil war}
+#' \item{\code{outcome}}{an unordered-categorical variable for the outcome of the civil war. Values include 1 (Side A wins),
+#' 2 (Side B wins), 3 (Compromise), 4 (war transformed into another type of war), 5 (war is ongoing at the end of 2007),
+#' 6 (stalemate), 7 (conflict continues below severity of war)}
+#' \item{\code{sideadeaths}}{the estimated deaths for the Side A participant (-9 = unknown, -8 = not applicable)}
+#' \item{\code{sidebdeaths}}{the estimated deaths for the Side B participant (-9 = unknown, -8 = not applicable)}
+#' \item{\code{ongo2007}}{a dummy variable for if this war is ongoing as of the end of 2007}
+#' }
+#'
+#' @details See \code{data-raw} directory for how these data were generated.
+#'
+#' @references
+#'
+#' Dixon, Jeffrey, and Meredith Sarkees. 2016. A Guide to Intra-State Wars: An Examination of Civil Wars, 1816-2014. Thousand Oaks, CA: Sage.
+#'
+#' Sarkees, Meredith Reid, and Frank Wheldon Wayman. 2010. Resort to War: A Data Guide to Inter-State, Extra-State, Intra-State, and Non-State Wars, 1816-2007.
+#' Washington DC: CQ Press.
+#'
+
+"cow_war_intra"
+
+
+#' Correlates of War Inter-State War Data (v. 4.0)
+#'
+#' These are a modified version of the inter-state war data from the Correlates of War project. Data are version 4.0. The temporal domain is
+#' 1816-2007. Data are functionally directed dyadic war-year.
+#'
+#' @format A data frame with 1932 observations on the following 15 variables.
+#' \describe{
+#' \item{\code{warnum}}{the Correlates of War war number}
+#' \item{\code{ccode1}}{the Correlates of War state code for side1}
+#'  \item{\code{ccode2}}{the Correlates of War state code for side2}
+#' \item{\code{year}}{a numeric vector for the year}
+#' \item{\code{cowinteronset}}{a dummy variable for whether this is an inter-state war onset (i.e. either the year in \code{StartYear1} or \code{StartYear2} in the raw data)}
+#' \item{\code{cowinterongoing}}{a numeric constant of 1}
+#' \item{\code{sidea1}}{a numeric vector for the side in the war for \code{ccode1}, either 1 or 2}
+#' \item{\code{sidea2}}{a numeric vector for the side in the war for \code{ccode2}, either 1 or 2}
+#' \item{\code{initiator1}}{a dummy variable that equals 1 if \code{ccode1} initiated the war}
+#' \item{\code{initiator2}}{a dummy variable that equals 1 if \code{ccode2} initiated the war}
+#' \item{\code{outcome1}}{the outcome for \code{ccode1} as numeric vector. Outcomes are 1 (winner), 2 (loser), 3 (compromise/tied),
+#' 4 (transformed into another type of war), 5 (ongoing at end of 2007, which is not observed in these data), 6 (stalemate),
+#' 7 (conflict continues below severity of war), and 8 (changed sides)}
+#' \item{\code{outcome2}}{the outcome for \code{ccode2} as numeric vector. Outcomes are 1 (winner), 2 (loser), 3 (compromise/tied),
+#' 4 (transformed into another type of war), 5 (ongoing at end of 2007, which is not observed in these data), 6 (stalemate),
+#' 7 (conflict continues below severity of war), and 8 (changed sides)}
+#' \item{\code{batdeath1}}{the estimated deaths for \code{ccode1} (-9 = unknown)}
+#' \item{\code{batdeath2}}{the estimated deaths for \code{ccode2} (-9 = unknown)}
+#' \item{\code{resume}}{a dummy variable that equals 1 if this is a conflict resumption episode}
+#' }
+#'
+#' @details See \code{data-raw} directory for how these data were generated. These data are here if you want it, but I caution against using them
+#' as gospel. There are a few problems here. One: -9s proliferate the data for battle deaths on either side, which is unhelpful. There are 10 cases where the sum
+#' of battle deaths is exactly 1,000 or 1,001. This is suspicious. The "side" variables are not well-explained---in fact they're not explained at all in the codebook---
+#' and this can lead a user astray if they want to interpret them analogous to the \code{sidea} variables in the Correlates of War Militarized Interstate Dispute
+#' data. You probably want to use the initiator variables for this. Further, the war data routinely betray the MID data and the two do not speak well to each other. The language Sarkees and Wayman (2010) use in their book
+#' talk about how MIDs "precede" a war or are "associated" with a war, which forgets the war data are supposed to be a subset of the MID data. In one case (Gulf War),
+#' they get the associated dispute number wrong and, in one prominent case (War of Bosnian Independence), they argue no MID exists at all (it's actually MID#3557).
+#'
+#' @references
+#'
+#' Sarkees, Meredith Reid, and Frank Wheldon Wayman. 2010. Resort to War: A Data Guide to Inter-State, Extra-State, Intra-State, and Non-State Wars, 1816-2007.
+#' Washington DC: CQ Press.
+#'
+
+"cow_war_inter"
+
+
+#' A \code{BibTeX} Data Frame of Citations
+#'
+#' This is a \code{BibTeX} file, loaded as a data frame, to assist the user in properly citing the source material that is used in this package.
+#'
+#' @format A data frame with 37 observations on the following 40 variables.
+#' \describe{
+#' \item{\code{CATEGORY}}{the \code{BibTeX} entry type}
+#' \item{\code{BIBTEXKEY}}{the \code{BibTeX} unique entry key}
+#'  \item{\code{ADDRESS}}{another \code{BibTeX} field}
+#' \item{\code{ANNOTE}}{another \code{BibTeX} field}
+#' \item{\code{AUTHOR}}{a list of authors for this entry}
+#' \item{\code{BOOKTITLE}}{another \code{BibTeX} field, for book title (if appropriate)}
+#' \item{\code{CHAPTER}}{another \code{BibTeX} field, for chapter (if appropriate)}
+#' \item{\code{CROSSREF}}{another \code{BibTeX} field}
+#' \item{\code{EDITION}}{another \code{BibTeX} field, for edition of book (if appropriate)}
+#' \item{\code{EDITOR}}{another \code{BibTeX} field, for book editor (if appropriate)}
+#' \item{\code{HOWPUBLISHED}}{another \code{BibTeX} field}
+#' \item{\code{INSTITUTION}}{another \code{BibTeX} field}
+#' \item{\code{JOURNAL}}{another \code{BibTeX} field, for the journal name (if appropriate)}
+#' \item{\code{KEY}}{another \code{BibTeX} field}
+#' \item{\code{MONTH}}{another \code{BibTeX} field}
+#' \item{\code{NOTE}}{another \code{BibTeX} field}
+#' \item{\code{NUMBER}}{another \code{BibTeX} field, for journal volume number (if appropriate)}
+#' \item{\code{ORGANIZATION}}{another \code{BibTeX} field}
+#' \item{\code{PAGES}}{another \code{BibTeX} field, for pages of the entry}
+#' \item{\code{PUBLISHER}}{another \code{BibTeX} field, for book publisher (if appropriate)}
+#' \item{\code{SCHOOL}}{another \code{BibTeX} field}
+#' \item{\code{SERIES}}{another \code{BibTeX} field}
+#' \item{\code{TITLE}}{another \code{BibTeX} field, for title of the entry}
+#' \item{\code{TYPE}}{another \code{BibTeX} field}
+#' \item{\code{VOLUME}}{another \code{BibTeX} field, for journal volume (if appropriate)}
+#' \item{\code{YEAR}}{another \code{BibTeX} field, for year of publication}
+#' \item{\code{KEYWORDS}}{another \code{BibTeX} field, used primarily for selective filtering in this package}
+#' \item{\code{URL}}{another \code{BibTeX} field, for website (if appropriate)}
+#' \item{\code{OWNER}}{another \code{BibTeX} field}
+#' \item{\code{TIMESTAMP}}{another \code{BibTeX} field, used occasionally when I started populating my master file (you will see some old entries here)}
+#' \item{\code{DOI}}{another \code{BibTeX} field, for a digital object identifier (used rarely)}
+#' \item{\code{EPRINT}}{another \code{BibTeX} field}
+#' \item{\code{JOURNALTITLE}}{another \code{BibTeX} field, which I think is actually a \code{BibLaTeX} field}
+#' \item{\code{ISSN}}{another \code{BibTeX} field}
+#' \item{\code{ABSTRACT}}{another \code{BibTeX} field, for entry abstract (if appropriate)}
+#' \item{\code{COPYRIGHT}}{another \code{BibTeX} field}
+#' \item{\code{JSTOR_ARTICLETYPE}}{another \code{BibTeX} field}
+#' \item{\code{JSTOR_FORMATTEDDATE}}{another \code{BibTeX} field}
+#' \item{\code{DATE.ADDED}}{another \code{BibTeX} field}
+#' \item{\code{DATE.MODIFIED}}{another \code{BibTeX} field}
+#' }
+#'
+#' @details See \code{data-raw} directory for how these data were generated. The data were created by \pkg{bib2df}, which is now a package dependency.
+#' I assume the user has some familiarity with \code{BibTeX}. Some entires were copy-pasted from my master bibliography file that I started in 2008 or so.
+#'
+#'
+
+"ps_bib"
