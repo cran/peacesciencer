@@ -1,3 +1,21 @@
+peacesciencer 0.6.0
+---------------------------------------------------------------------
+
+- Extend `cow_mindist` and `gw_mindist` data, given new `{cshapes}` updates. Data now run from 1886 to 2019.
+- Create `cow_capitals` and `gw_capitals` data. Remove `capitals` data for redundancy. Both capital data sets extended to 2020.
+- `add_capital_distance()` now works with Correlates of War and Gleditsch-Ward data, both dyad-year and state-year.
+- Fix bug in `add_atop_alliance()` that added 0s to years after the ATOP domain. Thanks to @joshuaalley for pointing this out.
+- Add/start a helper function file. These are internal functions I may need to write in order to reduce the potential of dependency issues resulting in package archival. This was necessitated by an Oct. 5, 2021 email from Brian Ripley about the slated removal of `{lubridate}`. Earlier versions of this package uncritically leaned on `{lubridate}` for functions I could either write myself (i.e. `year()`, which is now `.pshf_year()`) or were already duplicated in base functions in R (i.e. `ymd()`, a wrapper for `as.Date()` as I use it). With it, `{lubridate}` is no longer a requirement for this package.
+- Upgrade GML conflict data sets to 2.2.1. Fix/update documentation on this.
+- Add dispute-level summary of GML conflict data to assist with user-run whittle functions. This is `gml_mid_disps`.
+- Add `ps_conflict_type` attributes for some conflict data (e.g. CoW-MID, GML).
+- Add messages about case exclusion rules to `add_cow_mids()` and `add_gml_mids()`.
+- Add "whittle" class of functions. These include `whittle_conflicts_onsets()`, `whittle_conflicts_fatality()`, `whittle_conflicts_hostility()`, `whittle_conflicts_duration()`, `whittle_conflicts_reciprocation()`, `whittle_conflicts_startmonth()`, and `whittle_conflicts_jds()`. These are admittedly gnarly function names to type out if you don't have an IDE like Rstudio to assist you. Thus, these respective functions come with shortcuts of `wc_` (e.g. `wc_onsets()`). Check the package documentation to see what these are.
+- Add `show_duplicates()` as a diagnostic tool. This function is useful for users who want to do some advanced stuff with data created in `{peacesciencer}` (e.g. merging in custom data) and want to see if they botched a merge by creating duplicate observations.
+- Add/update stuff related to leaders. The `archigos` data frame now includes some more information about leaders (e.g. name, gender, and year of birth). `create_leaderyears()` will create leader-year data as well. The next update will expand more on leader functions. For now, the ensuing output from this function is treated as synonymous to state-year data.
+- Add `download_extdata()` as a way of side-stepping package space limitations. Some files will have to be stored remotely and then loaded at the user's discretion, which is what this function will do. This was largely brought on by the CoW trade data (`cow_trade_ndy`), which is also removed in this update. More data may have to be moved remotely in the future, though this package will endeavor to keep this to a bare minimum. Importantly, `download_extdata()` keeps inventory of what it is downloading. Data information is included therein. This develop does implicitly assume that the directory in which this package is installed is writable by the user. For like 99% of users, this shouldn't be a problem (and executing `.libPaths()` should confirm that). Do reach out if it is.
+- Remove country name from `creg` data frame.
+
 peacesciencer 0.5.0
 ---------------------------------------------------------------------
 

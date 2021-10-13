@@ -18,17 +18,18 @@ NULL
 #' }
 #'
 #' @details For convenience, the start year for most states is 1816. Samoa, for example, was not a state
-#' in 1816. However, the functions that use the \code{capitals} data will not create observations for states
+#' in 1816. However, the functions that use the \code{cow_capitals} data will not create observations for states
 #' that did not exist at a given point in time.
 #'
-#' The data should be current as of the end of 2019.
+#' The data should be current as of the end of 2020.
 #'
 #' Cases where a start year is not 1816 indicate a capital transition. For example, Brazil's capital moved from
 #' Rio de Janeiro to Brasilia (a planned capital) in 1960. Only 25 states in the data experienced a capital transition.
 #' The most recent was Burundi in 2018. Indonesia, as of writing, is planning on a capital transition, but this has not
 #' been completed yet.
 #'
-#' Kazakhstan renamed its capital for the state leader in 2019. These data retain the name of Astana.
+#' Kazakhstan renamed its capital for the state leader in 2019. These data retain the name of Astana. This will be changed
+#' in the event the software I use records this change.
 #'
 #' The capitals data are not without some peculiarities. Prominently, Portugal transferred the Portuguese court from
 #' Lisbon to Rio de Janeiro from 1808 to 1821. *This is recorded in the data.* A knowledge of the inter-state conflict data
@@ -46,8 +47,58 @@ NULL
 #' This concerns, at the most, one or two years for each of these three countries.
 #'
 #'
-"capitals"
+"cow_capitals"
 
+#' A complete list of capitals and capital transitions for Gleditsch-Ward state system members
+#'
+#' This is a complete list of capitals and capital transitions for Gleditsch-Ward state system members. I
+#' use it internally for calculating capital-to-capital distances in the \code{add_capital_distances()} function.
+#'
+#' @format A data frame with 248 observations on the following 7 variables.
+#' \describe{
+#' \item{\code{gwcode}}{a numeric vector for the Gleditsch-Ward state code}
+#' \item{\code{statenme}}{a character vector for the state}
+#' \item{\code{capital}}{a character vector for the name of the capital}
+#' \item{\code{styear}}{a character vector for the start year. See details section for more information.}
+#' \item{\code{endyear}}{a character vector for the end year. See details section for more information.}
+#' \item{\code{lat}}{a numeric vector of the latitude coordinates for the capital}
+#' \item{\code{lng}}{a numeric vector of the longitude coordinates for the capital}
+#' }
+#'
+#' @details For convenience, the start year for most states is 1816. Samoa, for example, was not a state
+#' in 1816. However, the functions that use the \code{gw_capitals} data will not create observations for states
+#' that did not exist at a given point in time.
+#'
+#' The data should be current as of the end of 2020.
+#'
+#' Cases where a start year is not 1816 indicate a capital transition. For example, Brazil's capital moved from
+#' Rio de Janeiro to Brasilia (a planned capital) in 1960. Only 25 states in the data experienced a capital transition.
+#' The most recent was Burundi in 2018. Indonesia, as of writing, is planning on a capital transition, but this has not
+#' been completed yet.
+#'
+#' Kazakhstan renamed its capital for the state leader in 2019. These data retain the name of Astana. This will be changed
+#' in the event the software I use records this change.
+#'
+#' The capitals data are not without some peculiarities. Prominently, Portugal transferred the Portuguese court from
+#' Lisbon to Rio de Janeiro from 1808 to 1821. *This is recorded in the data.* A knowledge of the inter-state conflict data
+#' will note there was no war or dispute between, say, Portugal and Spain (or Portugal and any other country) at any point
+#' during this time, but it does create some weirdness that would suggest a massive distance between two countries, like
+#' Portugal and Spain, that are otherwise land-contiguous.
+#'
+#' On Spain: the republican government moved the capital at the start of the civil war (in 1936) to Valencia. However, it
+#' abandoned this capital by 1937. I elect to not record this capital transition.
+#'
+#' On Myanmar: the Gleditsch-Ward system stands out as having Myanmar entered for the bulk of the 19th century. The capitals
+#' recorded for Myanmar (Burma) coincide with capitals of the Konbaung dynasty.
+#'
+#' The data also do some (I think) reasonable back-dating of capitals to coincide with states in transition without
+#' necessarily formal capitals by the first appearance in the state system membership data. These concern Lithuania,
+#' Kazakhstan, and the Philippines. Kaunas is the initial post-independence capital of Lithuania. Almaty is the initial
+#' post-independence capital of Kazakhstan. Quezon City is the initial post-independence capital of the Philippines.
+#' This concerns, at the most, one or two years for each of these three countries.
+#'
+#'
+"gw_capitals"
 
 #' Democracy data for all Correlates of War states
 #'
@@ -236,7 +287,7 @@ NULL
 
 #' Directed dispute-year data (Gibler, Miller, and Little, 2016)
 #'
-#' These are directed dispute-year data from the most recent version (2.1.1) of the
+#' These are directed dispute-year data from the most recent version (2.2.1) of the
 #' Gibler-Miller-Little (GML) militarized interstate dispute (MID) data. They are
 #' used internally for merging into full dyad-year data frames.
 #'
@@ -451,71 +502,76 @@ NULL
 #'
 "cow_igo_sy"
 
-#' The Minimum Distance Between States in the Correlates of War System, 1946-2015
+#' The Minimum Distance Between States in the Correlates of War System, 1886-2019
 #'
 #' These are non-directed dyad-year data for the minimum distance between states in the Correlates of War state system from
-#' 1946 to 2015. The data are generated from the \code{cshapes} package.
+#' 1886 to 2019. The data are generated from the \pkg{cshapes} package.
 #'
 #' @format A data frame with 817053 observations on the following 4 variables.
 #' \describe{
 #' \item{\code{ccode1}}{the Correlates of War state system code for the first state}
 #' \item{\code{ccode2}}{the Correlates of War state system code for the second state}
 #' \item{\code{year}}{the year}
-#' \item{\code{mindist}}{the minimum distance between states on Dec. 31 of the year, in kilometers}
+#' \item{\code{mindist}}{the minimum distance between states on Jan. 1 of the year, in kilometers}
 #' }
 #'
-#' @details The data are generated from the \code{cshapes} package. The package authors purport that the data
+#' @details The data are generated from the \pkg{cshapes} package. The package authors purport that the data
 #' are generated to be compatible with Correlates of War system codes, but a review I did several years ago for
 #' an unrelated project (published in 2017 in \emph{Conflict Management & Peace Science}, which you should cite for
 #' all your articles if you're reading this) suggested the output does not seem to perfectly meet that billing. These
-#' included oddball cases like Zanzibar, United Arab Republic, Comoros, East Germany, and a few others. I pre-process
-#' these as outlined in the associated file in the \code{data-raw} directory on the project's Github.
+#' included oddball cases like Zanzibar, United Arab Republic, Comoros, East Germany, and a few others. Those appear to
+#' be fixed in this version.
 #'
 #' Data are automatically generated (by default) as directed dyad-years. I elect to make them non-directed for space
 #' considerations. Making non-directed dyad-year data into directed dyad-year data isn't too difficult in R. It just
 #' looks weird to see the code that does it.
 #'
-#' Most of the data I prove elsewhere in this package are to be understood as the data as they were at the *start* of
+#' Previous versions of these data were for the minimum distance as of Dec. 31 of the referent year. These are now Jan. 1.
+#' Most of the data I prove elsewhere in this package are  to be understood as the data as they were at the *start* of
 #' the year. This is how I process, for example, the \code{capitals} data as they get merged in the \code{add_capital_distance()}
-#' function. However, the script that generates these data are set at Dec. 31 of the year and not Jan. 1. I do this for concerns
-#' of maximizing data coverage. If you wanted the same effect, just lag the data a year.
+#' function. However, the script that generates these data are set at Jan. 1 of the year and not Dec. 31. Right now, the \pkg{cshapes}
+#' does not appear to work on my system and I do not know why. Fortunately, the package authors made these data available.
 #'
 #' @references
+#'
+#' Schvitz, Guy et al. 2021. "Mapping The International System, 1886-2017: The \code{CShapes} 2.0 Dataset."
+#'  \emph{Journal of Conflict Resolution}. \url{https://journals.sagepub.com/doi/full/10.1177/00220027211013563}
 #'
 #' Weidmann, Nils B. and Kristian Skrede Gleditsch. 2010. "Mapping and Measuring Country Shapes: The \code{cshapes} Package." \emph{The R Journal} 2(1): 18-24
 
 "cow_mindist"
 
-#' The Minimum Distance Between States in the Gleditsch-Ward System, 1946-2015
+#' The Minimum Distance Between States in the Gleditsch-Ward System, 1886-2019
 #'
 #' These are non-directed dyad-year data for the minimum distance between states in the Gleditsch-Ward state system from
-#' 1946 to 2015. The data are generated from the \code{cshapes} package.
+#' 1886 to 2018. The data are generated from the \pkg{cshapes} package.
 #'
 #' @format A data frame with 868813 observations on the following 4 variables.
 #' \describe{
 #' \item{\code{gwcode1}}{the Gleditsch-Ward state system code for the first state}
 #' \item{\code{gwcode2}}{the Gleditsch-Ward state system code for the second state}
 #' \item{\code{year}}{the year}
-#' \item{\code{mindist}}{the minimum distance between states on Dec. 31 of the year, in kilometers}
+#' \item{\code{mindist}}{the minimum distance between states on Jan. 1 of the year, in kilometers}
 #' }
 #'
-#' @details The data are generated from the \code{cshapes} package. The package authors purport that the data
+#' @details The data are generated from the \pkg{cshapes} package. The package authors purport that the data
 #' are generated to be compatible with the Gleditsch-Ward system. I trust them on this; indeed, Gleditsch is one of the
-#' authors of the \code{cshapes} package. However, I'm not sure how exhaustive the coverage is. For example,
-#' Tibet is missing in these data and it should not be. I do not use Gleditsch-Ward codes for my own research, so my
-#' quality control here for functions using these data will be minimal. I can only confirm there are no duplicates in the
-#' data.
+#' authors of the \pkg{cshapes} package.
 #'
 #' Data are automatically generated (by default) as directed dyad-years. I elect to make them non-directed for space
 #' considerations. Making non-directed dyad-year data into directed dyad-year data isn't too difficult in R. It just
 #' looks weird to see the code that does it.
 #'
-#' Most of the data I prove elsewhere in this package are to be understood as the data as they were at the *start* of
+#' Previous versions of these data were for the minimum distance as of Dec. 31 of the referent year. These are now Jan. 1.
+#' Most of the data I prove elsewhere in this package are  to be understood as the data as they were at the *start* of
 #' the year. This is how I process, for example, the \code{capitals} data as they get merged in the \code{add_capital_distance()}
-#' function. However, the script that generates these data are set at Dec. 31 of the year and not Jan. 1. I do this for concerns
-#' of maximizing data coverage. If you wanted the same effect, just lag the data a year.
+#' function. However, the script that generates these data are set at Jan. 1 of the year and not Dec. 31. Right now, the \pkg{cshapes}
+#' does not appear to work on my system and I do not know why. Fortunately, the package authors made these data available.
 #'
 #' @references
+#'
+#' Schvitz, Guy et al. 2021. "Mapping The International System, 1886-2017: The \code{CShapes} 2.0 Dataset."
+#'  \emph{Journal of Conflict Resolution}. \url{https://journals.sagepub.com/doi/full/10.1177/00220027211013563}
 #'
 #' Weidmann, Nils B. and Kristian Skrede Gleditsch. 2010. "Mapping and Measuring Country Shapes: The \code{cshapes} Package." \emph{The R Journal} 2(1): 18-24
 
@@ -543,33 +599,6 @@ NULL
 #' Barbieri, Katherine, Omar M.G. Keshk, and Brian Pollins. 2009. "TRADING DATA: Evaluating Our Assumptions and Coding Rules." \emph{Conflict Management and Peace Science}, 26(5): 471-491.
 #'
 "cow_trade_sy"
-
-
-#' Correlates of War Dyadic Trade Data Set (v. 4.0)
-#'
-#' These are dyad-year-level data for national trade from the Correlates of War project.
-#'
-#'
-#' @format A data frame with 673654 observations on the following seven variables.
-#' \describe{
-#' \item{\code{ccode1}}{a numeric vector for the Correlates of War state code for the first state}
-#' \item{\code{ccode2}}{a numeric vector for the Correlates of War state code for the second state}
-#' \item{\code{year}}{the year}
-#' \item{\code{flow1}}{imports of \code{ccode1} from \code{ccode2}, in current million USD}
-#' \item{\code{flow2}}{imports of \code{ccode2} from \code{ccode1}, in current million USD}
-#' \item{\code{smoothflow1}}{smoothed \code{flow1} values}
-#' \item{\code{smoothflow2}}{smoothed \code{flow2} values}
-#' }
-#'
-#' @details The \code{data-raw} directory on the project's Github shows how the data were processed.
-#'
-#' @references
-#'
-#' Barbieri, Katherine and Omar M.G. Keshk. 2016. Correlates of War Project Trade Data Set Codebook, Version 4.0. Online: \url{https://correlatesofwar.org}
-#'
-#' Barbieri, Katherine, Omar M.G. Keshk, and Brian Pollins. 2009. "TRADING DATA: Evaluating Our Assumptions and Coding Rules." \emph{Conflict Management and Peace Science}, 26(5): 471-491.
-#'
-"cow_trade_ndy"
 
 #' Alliance Treaty Obligations and Provisions (ATOP) Project Data (v. 5.0)
 #'
@@ -600,13 +629,17 @@ NULL
 #' Archigos: A (Subset of a) Dataset on Political Leaders
 #'
 #' These are leader-level data drawn from the Archigos data. Space considerations mean I offer here just a few columns
-#' based on these data.
+#' based on these data.  Data are version 4.1.
 #'
 #'
-#' @format A data frame with 3409 observations on the following seven variables.
+#' @format A data frame with 3409 observations on the following 10 variables.
 #' \describe{
 #' \item{\code{ccode}}{a numeric vector for the Correlates of War state code}
+#' \item{\code{obsid}}{a character vector for observation ID}
 #' \item{\code{leadid}}{the unique leader identifier}
+#'  \item{\code{leader}}{the leader name}
+#'   \item{\code{yrborn}}{the year the leader was born}
+#'   \item{\code{gender}}{a categorical variable for leader gender ("M" for men, "W" for women)}
 #' \item{\code{startdate}}{a date for the leader start date}
 #' \item{\code{enddate}}{a date for the leader end date}
 #' \item{\code{entry}}{a character vector for the leader's entry type}
@@ -614,12 +647,22 @@ NULL
 #' \item{\code{exitcode}}{a character vector for more information about the leader's exit type}
 #' }
 #' @details Space considerations mean I can only offer a few columns from the overall data. Archigos data are rich with information. Consult
-#' the raw data available on Hein Goeman's website for more. Data are version 4.1.
+#' the raw data available on Hein Goeman's website for more.
+#'
+#' To best conform with data requirements on CRAN, a few leader names were renamed if they included irregular
+#' characters (e.g. umlauts or accents). These leaders are "(Juan Orlando) Hernández" (`HON-2014`),
+#' "(Antonio) Saca González" (`SAL-2004`), "Julián Trujillo Largacha" (`COL-1878`), "César Gaviria Trujillo"
+#' (`COL-1990`), "Gabriel García Moreno" (`ECU-1869`), "Marcos A. Morínigo" (`PAR-1894-1`), "Higinio Morínigo" (`PAR-1940`),
+#' "Sebastián Piñera" (`CHL-2010`), "Sauli Niinistö" (`FIN-2012`), "Louis Gerhard De Geer" (`SWD-1876`),
+#' "Stefan Löfven" (`SWD-2014`), "Lars Løkke Rasmussen" (`DEN-2009`, `DEN-2015`), and "Fernando de Araújo"
+#' (`ETM-2008-1`). None of these names contain these special characters in the data here.
 #'
 #' @references
 #'
 #' Goemans, Henk E., Kristian Skrede Gleditsch, and Giacomo Chiozza. 2009. "Introducing Archigos: A Dataset of Political Leaders"
 #' \emph{Journal of Peace Research} 46(2): 269--83.
+#'
+#' @md
 
 "archigos"
 
@@ -797,7 +840,7 @@ NULL
 "cow_mid_dirdisps"
 
 
-#' Abbreviate CoW-MID Dispute-level Data (v. 5.0)
+#' Abbreviated CoW-MID Dispute-level Data (v. 5.0)
 #'
 #' This is an abbreviated version of the dispute-level CoW-MID data.
 #'
@@ -886,10 +929,10 @@ NULL
 "cow_mid_ddydisps"
 
 
-#' Directed Dyadic Dispute-Year Data with No Duplicate Dyad-Years (CoW-MID, v. 5.0)
+#' Directed Dyadic Dispute-Year Data with No Duplicate Dyad-Years (GML, v. 2.2.1)
 #'
-#' These are directed dyadic dispute year data derived from the Correlates of War (CoW) Militarized Interstate
-#'  Dispute (MID) project. Data are from version 5.0. These were whittled to where there is no duplicate dyad-years.
+#' These are directed dyadic dispute year data derived from the Gibler-Miller-Little (GML) Militarized Interstate
+#'  Dispute (MID) project. Data are from version 2.2.1. These were whittled to where there is no duplicate dyad-years.
 #'  Its primary aim here is merging into a dyad-year data frame.
 #'
 #'
@@ -1070,7 +1113,6 @@ NULL
 #'
 #' @format A data frame with 11523 observations on the following 9 variables.
 #' \describe{
-#' \item{\code{country}}{a character vector of the state name}
 #' \item{\code{ccode}}{a Correlates of War state code}
 #' \item{\code{gwcode}}{a Gleditsch-Ward state code}
 #' \item{\code{creg_ccode}}{a numeric code for the state, mostly patterned off Correlates of War codes but with important differences. See details section for more.}
@@ -1187,7 +1229,8 @@ NULL
 #' \item{\code{ongo2007}}{a dummy variable for if this war is ongoing as of the end of 2007}
 #' }
 #'
-#' @details See \code{data-raw} directory for how these data were generated.
+#' @details See \code{data-raw} directory for how these data were generated. In the Guinnea-Bissau Civil War (1998, 1999),
+#' the "Mané Junta" were changed to just "Mane Junta" to coincide with CRAN's character requirements.
 #'
 #' @references
 #'
@@ -1286,16 +1329,46 @@ NULL
 #' \item{\code{JOURNALTITLE}}{another \code{BibTeX} field, which I think is actually a \code{BibLaTeX} field}
 #' \item{\code{ISSN}}{another \code{BibTeX} field}
 #' \item{\code{ABSTRACT}}{another \code{BibTeX} field, for entry abstract (if appropriate)}
-#' \item{\code{COPYRIGHT}}{another \code{BibTeX} field}
-#' \item{\code{JSTOR_ARTICLETYPE}}{another \code{BibTeX} field}
-#' \item{\code{JSTOR_FORMATTEDDATE}}{another \code{BibTeX} field}
 #' \item{\code{DATE.ADDED}}{another \code{BibTeX} field}
 #' \item{\code{DATE.MODIFIED}}{another \code{BibTeX} field}
 #' }
 #'
 #' @details See \code{data-raw} directory for how these data were generated. The data were created by \pkg{bib2df}, which is now a package dependency.
-#' I assume the user has some familiarity with \code{BibTeX}. Some entires were copy-pasted from my master bibliography file that I started in 2008 or so.
+#' I assume the user has some familiarity with \code{BibTeX}. Some entries were copy-pasted from my master bibliography file that I started in 2008 or so.
 #'
 #'
 
 "ps_bib"
+
+
+#' Abbreviated GML MID Dispute-level Data (v. 2.2.1)
+#'
+#' This is an abbreviated version of the dispute-level Gibler-Miller-Little (GML) MID data.
+#'
+#'
+#' @format A data frame with 2436 observations on the following 7 variables.
+#' \describe{
+#' \item{\code{dispnum}}{a numeric vector for the CoW-MID dispute number}
+#' \item{\code{styear}}{a numeric vector for the start year of the MID}
+#' \item{\code{stmon}}{a numeric vector for the start month of the MID}
+#' \item{\code{outcome}}{a numeric vector for the outcome of the MID}
+#' \item{\code{settle}}{a numeric vector for the how dispute was settled}
+#' \item{\code{fatality}}{a numeric vector for the fatality level of the dispute}
+#' \item{\code{mindur}}{a numeric vector for the minimum duration of the MID}
+#' \item{\code{maxdur}}{a numeric vector for the maximum duration of the MID}
+#' \item{\code{hiact}}{a numeric vector for the highest action of the MID}
+#' \item{\code{hostlev}}{a numeric vector for the hostility level of the MID}
+#'  \item{\code{recip}}{a numeric vector for whether a MID was reciprocated}
+#' }
+#'
+#' @details These data are purposely light on information; they're not intended to be used for dispute-level analyses, per se.
+#' They're intended to augment the directed dyadic dispute-year data by adding in variables that serve as exclusion rules to whittle
+#' the data from dyadic dispute-year to just dyad-year data.
+#'
+#' @references
+#'
+#' Gibler, Douglas M., Steven V. Miller, and Erin K. Little. 2016. “An Analysis of the Militarized
+#' Interstate Dispute (MID) Dataset, 1816-2001.” International Studies Quarterly 60(4): 719-730.
+#'
+
+"gml_mid_disps"
