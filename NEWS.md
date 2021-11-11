@@ -1,3 +1,41 @@
+peacesciencer 0.7.0
+---------------------------------------------------------------------
+
+This is a leader-intensive update. Additions/new features include:
+
+- `LEAD`: a data set on select leader experience and attribute descriptions (LEAD).
+- `lwuf`: a data set from [Carter and Smith (2020)](https://doi.org/10.1017/S0003055420000313) measuring leader willingness to use force.
+- `download_extdata()` now also downloads directed leader dyad-year data for all directed leader dyad-years from 1870 to 2015. The data come in two forms. One is all possible (inter-state, leader-overlap) dyadic leader pairings from 1870 to 2015, as presented in the Archigos data. The second standardizes these data to the CoW state system data. It also downloads directed dyad-yer data of chance-corrected measures of dyadic
+foreign policy similarity. Type `?download_extdata()` in the R session after updating for more information.
+- `create_leaderdyadyears()`: create leader dyad-year data (via `archigos`) for all leader dyad-year combinations from 1870 to 2015. This function leans on remote data available for download in `download_extdata()`. The function returns either all possible Gleditsch-Ward dyadic leader pairings (standardized to Gleditsch-Ward state system dates) or standardizes the Archigos data to Correlates of War state system member data.
+- `gml_part`: a data set on participant summary information from the GML MID data.
+- `add_fpsim()` adds estimates of dyadic foreign policy similarity to your dyad-year and leader-dyad-year data.
+- `add_gml_mids()` now works with leader-year data. See documentation for more.
+- `add_spells()` will do more general peace spell calculations, though this package will now depend on v. 1.3.0 of `{stevemisc}`.
+- `add_lwuf()` adds estimates of leader willingness to use force to leader-year and leader-dyad-year analyses.
+- `add_lead()` adds some leader attributes to leader-year or leader-dyad-year analyses.
+- `gml_mid_dirleaderdisps` and `gml_mid_ddlydisps` include data on leader dyads in conflict.
+- `declare_attributes()` allows users to declare package-specific attributes to outside data they bring to the R session. This allows the user to use many of the shortcuts in this package to their data.
+- `ps_version()` will display version information about the data included in this package.
+- `false_cow_dyads` and `false_gw_dyads` list a handful of dyads that appear in the same year, but never on the same day in the year. They're used for anti-joining in `create_dyadyears()`.
+- `leader_codes` matches, as well as one can, leader/observation codes in Archigos 4.1, Archigos 2.9, and the LEAD data.
+
+Other changes include:
+
+- Several functions now have leader-year or leader-dyad-year corollaries. Examples here include `add_creg_fractionalization()`, `add_rugged_terrain()`, `add_democracy()`, and more. Some functions, like `add_gml_mids()`, can be anchored explicitly to leader-level units of analyses. Several other functions (e.g. `add_sdp_gdp()` and others like it) are fundamentally still state-year or dyad-year functions the extent to which leaders are still nested in states and leader-dyads are just a derivation of inter-state dyads (i.e. leaders are nested in states). Use with some caution with that in mind, though these functions are still useful for leader-level analyses that are interested in some of these covariates for making state-to-state comparisons on top of leader-level analyses.
+- The data in `cow_sdp_gdp` and `gw_sdp_gdp` are now rounded to three decimal points.  These "economic" data are routinely the biggest in the package, and it's because of the decimal points. The justification for this is these data are estimated/simulated anyways and 
+the information loss is at the 1/1000th decimal point. This procedure basically cuts the size of the data to be less than 25% of 
+its original size. This is a huge reduction in disk space.
+- "leader-year" (`leader_year`) is now an attribute. Where appropriate, leader-year and state-year functions are treated the same. For example, the GDP data contained in  `add_sdp_gdp()` are fundamentally state-year, but perhaps a leader-year control of interest even as leaders are nested in states.
+- "leader-dyad-year" (`leader_dyad_year`) is now an attribute. Where appropriate, leader-year and leader-dyad-year functions are treated the same. Where possible/tractable, leader-dyad-year data are explicitly anchored to leader-level units of analysis (e.g. `add_gml_mids()`, prominently).
+- `create_leaderyears()` works on the observation ID and not the leader ID. Observation IDs are unique to each leader-period, but leader IDs are not.
+- The directed leader dyad-year data is indexed by observation ID and not leader ID, per se. This is because leaders can have multiple terms in office.
+- `add_peace_years()` has been superseded by `add_spells()`. The "superseded" language communicates the function will still work as it has for previous releases, for data types supported by the function, though its development will stop. `add_spells()` promises to have greater functionality. Communicating these changes via badges brings in `{lifecycle}` as an imported package.
+- `archigos` data's `ccode` has been renamed to `gwcode` to reflect these are actually Gleditsch-Ward state codes.
+- The "whittle" functions now work with leader-dyadic conflict data available in the package.
+- The package has started taking inventory of non-ASCII characters that appear in the package (e.g. spelling "Wuerttemberg" with the U-umlaut) and replacing them. This is not a functionality issue at all. The problem is CRAN raises a note for every single non-ASCII character it sees and I'd like to avoid the CRAN hammer if I can.
+- `create_leaderyears()`, `create_dyadyears()`, and `create_stateyears()` have a built-in argument for subsetting the years returned by the function (`subset_years`). Use to your discretion.
+
 peacesciencer 0.6.0
 ---------------------------------------------------------------------
 
@@ -10,7 +48,7 @@ peacesciencer 0.6.0
 - Add dispute-level summary of GML conflict data to assist with user-run whittle functions. This is `gml_mid_disps`.
 - Add `ps_conflict_type` attributes for some conflict data (e.g. CoW-MID, GML).
 - Add messages about case exclusion rules to `add_cow_mids()` and `add_gml_mids()`.
-- Add "whittle" class of functions. These include `whittle_conflicts_onsets()`, `whittle_conflicts_fatality()`, `whittle_conflicts_hostility()`, `whittle_conflicts_duration()`, `whittle_conflicts_reciprocation()`, `whittle_conflicts_startmonth()`, and `whittle_conflicts_jds()`. These are admittedly gnarly function names to type out if you don't have an IDE like Rstudio to assist you. Thus, these respective functions come with shortcuts of `wc_` (e.g. `wc_onsets()`). Check the package documentation to see what these are.
+- Add "whittle" class of functions. These include `whittle_conflicts_onsets()`, `whittle_conflicts_fatality()`, `whittle_conflicts_hostility()`, `whittle_conflicts_duration()`, `whittle_conflicts_reciprocation()`, `whittle_conflicts_startmonth()`, and `whittle_conflicts_jds()`. These are admittedly gnarly function names to type out if you don't have an IDE like RStudio to assist you. Thus, these respective functions come with shortcuts of `wc_` (e.g. `wc_onsets()`). Check the package documentation to see what these are.
 - Add `show_duplicates()` as a diagnostic tool. This function is useful for users who want to do some advanced stuff with data created in `{peacesciencer}` (e.g. merging in custom data) and want to see if they botched a merge by creating duplicate observations.
 - Add/update stuff related to leaders. The `archigos` data frame now includes some more information about leaders (e.g. name, gender, and year of birth). `create_leaderyears()` will create leader-year data as well. The next update will expand more on leader functions. For now, the ensuing output from this function is treated as synonymous to state-year data.
 - Add `download_extdata()` as a way of side-stepping package space limitations. Some files will have to be stored remotely and then loaded at the user's discretion, which is what this function will do. This was largely brought on by the CoW trade data (`cow_trade_ndy`), which is also removed in this update. More data may have to be moved remotely in the future, though this package will endeavor to keep this to a bare minimum. Importantly, `download_extdata()` keeps inventory of what it is downloading. Data information is included therein. This develop does implicitly assume that the directory in which this package is installed is writable by the user. For like 99% of users, this shouldn't be a problem (and executing `.libPaths()` should confirm that). Do reach out if it is.

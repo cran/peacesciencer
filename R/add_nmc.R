@@ -1,27 +1,38 @@
 #' Add Correlates of War National Military Capabilities Data
 #'
-#' @description \code{add_nmc()} allows you to add the Correlates of War National Material Capabilities data to dyad-year or state-year data.
+#' @description \code{add_nmc()} allows you to add the Correlates of War National Material Capabilities data to your data.
 #'
 #'
-#' @return \code{add_nmc()} takes a dyad-year data frame or state-year data frame and adds information
-#' about the national material capabilities for the state or two states in the dyad in a given year. If the data are dyad-year, the function
-#' adds 12 total columns for the first state (i.e. \code{ccode1}) and the second state (i.e. \code{ccode2}) for all estimates of national
-#' military capabilities provided by the Correlates of War project. If the data are state-year, the function returns six additional columns
+#' @return
+#'
+#' \code{add_nmc()} takes a (dyad-year, leader-year, leader-dyad-year, state-year) data frame and adds information
+#' about the national material capabilities for the state or two states in the dyad in a given year.
+#' If the data are dyad-year (or leader-dyad-year),
+#' the function adds 12 total columns for the first state (i.e. \code{ccode1}) and the
+#' second state (i.e. \code{ccode2}) for all estimates of national
+#' military capabilities provided by the Correlates of War project. If the data are
+#' state-year (or leader-year), the function returns six additional columns
 #' to the original data that contain that same information for a given state in a given year.
 #'
-#' @details The function leans on attributes of the data that are provided by the \code{create_dyadyear()} or
-#' \code{create_stateyear()} function. Make sure that function (or data created by that function) appear at the top
-#' of the proverbial pipe.
+#' @details
+#'
+#'
+#' Be mindful that the data are fundamentally state-year and that extensions to leader-level data should be understood
+#' as approximations for leaders in a given state-year.
 #'
 #' @author Steven V. Miller
 #'
-#' @param data a dyad-year data frame (either "directed" or "non-directed") or a state-year data frame.
+#' @param data a data frame with appropriate \pkg{peacesciencer} attributes
 #'
 #' @references
 #'
-#' Singer, J. David, Stuart Bremer, and John Stuckey. (1972). "Capability Distribution, Uncertainty, and Major Power War, 1820-1965." in Bruce Russett (ed) Peace, War, and Numbers, Beverly Hills: Sage, 19-48.
+#' Singer, J. David, Stuart Bremer, and John Stuckey. (1972).
+#' "Capability Distribution, Uncertainty, and Major Power War, 1820-1965." in
+#' Bruce Russett (ed) *Peace, War, and Numbers*, Beverly Hills: Sage, 19-48.
 #'
-#' Singer, J. David. 1987. "Reconstructing the Correlates of War Dataset on Material Capabilities of States, 1816-1985" International Interactions, 14: 115-32.
+#' Singer, J. David. 1987. "Reconstructing the Correlates of War Dataset on
+#' Material Capabilities of States, 1816-1985."
+#' *International Interactions* 14(1): 115-32.
 #'
 #'
 #' @examples
@@ -36,7 +47,7 @@
 #'
 add_nmc <- function(data) {
 
-  if (length(attributes(data)$ps_data_type) > 0 && attributes(data)$ps_data_type == "dyad_year") {
+  if (length(attributes(data)$ps_data_type) > 0 && attributes(data)$ps_data_type %in% c("dyad_year", "leader_dyad_year")) {
 
     if (!all(i <- c("ccode1", "ccode2") %in% colnames(data))) {
 
@@ -67,7 +78,7 @@ add_nmc <- function(data) {
     }
 
 
-  } else if (length(attributes(data)$ps_data_type) > 0 && attributes(data)$ps_data_type == "state_year") {
+  } else if (length(attributes(data)$ps_data_type) > 0 && attributes(data)$ps_data_type %in% c("state_year", "leader_year")) {
 
     if (!all(i <- c("ccode") %in% colnames(data))) {
 

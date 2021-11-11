@@ -4,29 +4,68 @@
 \alias{create_leaderyears}
 \title{Create leader-years from leader data}
 \usage{
-create_leaderyears(system = "archigos")
+create_leaderyears(system = "archigos", standardize = "none", subset_years)
 }
 \arguments{
-\item{system}{a leader system with which to create leader-years. Right now, only "archigos" is supported.}
+\item{system}{a leader system with which to create leader-years.
+Right now, only "archigos" is supported.}
+
+\item{standardize}{a character vector of length one: "cow", "gw", or "none".
+If "cow", the function standardizes the leader-years to just those that
+overlap  with state system membership in the Correlates of War state
+system (see: \code{cow_states}). If "gw", the function standardizes the
+leader-years to just those that overlap with the state system dates of
+the Gleditsch-Ward date (see: \code{gw_states}). If "none", the function
+returns all leader-years as presented in Archigos (which is nominally
+denominated in Gleditsch-Ward state system codes, if not necessarily
+Gleditsch-Ward state system dates). Default is "none".}
+
+\item{subset_years}{and optional character vector for subsetting the years
+returned to just some temporal domain of interest to the user. For example,
+\code{c(2000:2005)} would subset the data to just all leader-years in 2000, 2001,
+2002, 2003, 2004, and 2005 Be advised that it's easiest to subset the data after
+the full universe of leader-year data have been created. It is also agnostic
+about what was supplied to the \code{standardize} argument.}
 }
 \value{
 \code{create_leaderyears()} takes leader-level data available in \pkg{peacesciencer}
-and returns a leader-year-level data frame.
+and returns a leader-year-level data frame. This minimal output contains the observation ID
+from Archigos, the year, the state code for the leader (i.e. either Correlates of War or Gleditsch-Ward, depending on
+the \code{standardize} argument),
+the leader's name in Archigos (if it may help the reader to have that), an approximation of the leader's age,
+and the year in office for the leader (as a running count, starting at 1).
 }
 \description{
 \code{create_leaderyears()} allows you to generate leader-year data from
 leader-level data provided in \pkg{peacesciencer}
 }
 \details{
-\code{create_leaderyears()}, as of writing, only supports the Archigos data set of leaders. Importantly:
-the absence of much leader-level covariates (of which I am aware) means, for now, the data that are returned are
-treated as observationally equivalent to state-year data. Users should be careful here, but it does mean the data
-will work with other functions in \pkg{peacesciencer} that have support for state-year data (e.g. \code{add_nmc()},
-\code{add_rugged_terrain()}). This is declared in the attribute field.
+\code{create_leaderyears()}, as of writing, only supports the Archigos data set of leaders.
+
+Many leader ages are known with precision. Many are not recorded in the Archigos data. Knowing well that years are aggregates
+of days, the leader age variable that gets returned in this output should be treated as an approximation of the leader's age.
+
+Be mindful that leader tenure is calculated \emph{before} any standardization argument. Archigos has some leader entries that precede
+the state system entry for the state, or otherwise do not coincide with state system dates. For example, Lynden Pindling was
+in his seventh year as leader of The Bahamas (in various titles) before independence in 1973 (in which he became prime minister).
+Leader tenure is not tethered to state system dates in situations like this (only the dates recorded in the Archigos data).
+
+The leader tenure variable returned here does have the odd effect of potentially misstating leader tenure, or at least
+making it seem unusual. For example, Jimmy Carter (\code{USA-1877}) was president in 1977 (year 1), 1978 (year 2), 1979 (year 3),
+1980 (year 4), and exited in January 1981 (year 5). Again: years are aggregates of days and it's not evident how else this
+information should be perfectly communicated with that in mind. Users with some R skills can extract the underlying information
+from the \code{archigos} data and, perhaps, calculate something like the maximum leader tenure (in days) on either Dec. 31 of
+the referent year, or leader exit before Dec. 31 that year, or something to that effect. No matter, I think this to at least be
+a defensible variable to present to the user with those limitations in mind. If the user is interested in leader tenure in a leader-year
+analysis, this variable should be fine. If the user is interested in something like the effect of a fifth year on some kind of leader
+behavior, they will want to figure out something else.
 }
 \examples{
 \donttest{
+# standardize = 'none' is default
 create_leaderyears()
+
+create_leaderyears(standardize = 'gw')
 }
 
 }

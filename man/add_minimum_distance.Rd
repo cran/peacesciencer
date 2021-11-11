@@ -2,28 +2,27 @@
 % Please edit documentation in R/add_minimum_distance.R
 \name{add_minimum_distance}
 \alias{add_minimum_distance}
-\title{Add minimum distance data to a dyad-year or state-year data frame}
+\title{Add minimum distance data to your data frame}
 \usage{
 add_minimum_distance(data)
 }
 \arguments{
-\item{data}{a dyad-year data frame (either "directed" or "non-directed") or state-year data frame}
+\item{data}{a data frame with appropriate \pkg{peacesciencer} attributes}
 }
 \value{
-\code{add_minimum_distance()} takes a dyad-year or state-year data frame and adds the
+\code{add_minimum_distance()} takes a (dyad-year, leader-year, leader-dyad-year, state-year) data frame and adds the
 minimum distance between the first state and the second state (in dyad-year data) or the minimum
 minimum (sic) distance for a given state in a given year.
 }
 \description{
 \code{add_minimum_distance()} allows you to add the minimum
-distance (in kilometers) to a dyad-year or state-year data frame. These estimates
+distance (in kilometers) to a (dyad-year, leader-year, leader-dyad-year, state-year) data frame. These estimates
 are recorded in the \code{cow_mindist} and \code{gw_mindist} data that come with this package. The
 data are current as of the end of 2019.
 }
 \details{
-The function leans on attributes of the data that are provided by the \code{create_dyadyear()} or
-\code{create_stateyear()} function. Make sure that function (or data created by that function) appear at the top
-of the proverbial pipe.
+The function leans on attributes of the data that are provided by one of the "create" functions
+in this package (e.g. \code{create_dyadyear()} or \code{create_stateyear()}).
 }
 \examples{
 
@@ -41,9 +40,10 @@ create_stateyears(system ="gw") \%>\% add_minimum_distance()
 }
 \references{
 Schvitz, Guy et al. 2021. "Mapping The International System, 1886-2017: The \code{CShapes} 2.0 Dataset."
- \emph{Journal of Conflict Resolution}. \url{https://journals.sagepub.com/doi/full/10.1177/00220027211013563}
+\emph{Journal of Conflict Resolution}. \url{https://journals.sagepub.com/doi/full/10.1177/00220027211013563}
 
-Weidmann, Nils B. and Kristian Skrede Gleditsch. 2010. "Mapping and Measuring Country Shapes: The \code{cshapes} Package." \emph{The R Journal} 2(1): 18-24.
+Weidmann, Nils B. and Kristian Skrede Gleditsch. 2010. "Mapping and Measuring Country Shapes: The \code{cshapes} Package."
+\emph{The R Journal} 2(1): 18-24.
 }
 \author{
 Steven V. Miller

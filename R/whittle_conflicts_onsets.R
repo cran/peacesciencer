@@ -1,19 +1,27 @@
 #' Whittle Unique Conflict Onset-Years from Conflict-Year Data
 #'
-#' @description \code{whittle_conflicts_onsets()} is in a class of do-it-yourself functions for coercing (i.e. "whittling") conflict-year
-#' data with cross-sectional units to unique conflict-year data by cross-sectional unit. The inspiration here is clearly the problem
-#' of whittling dyadic dispute-year data into true dyad-year data (like in the Gibler-Miller-Little conflict data). This particular
+#' @description \code{whittle_conflicts_reciprocation()} is in a class of
+#' do-it-yourself functions for coercing (i.e. "whittling") conflict-year
+#' data with cross-sectional units to unique conflict-year data by
+#' cross-sectional unit. The inspiration here is clearly the problem
+#' of whittling dyadic dispute-year data into true dyad-year data (like in
+#' the Gibler-Miller-Little conflict data). This particular
 #' function will drop ongoing conflicts in the presence of unique onsets.
 #'
-#' @return \code{whittle_conflicts_onsets()} takes a dyad-year data frame with a declared conflict attribute type and, grouping by the
-#' dyad and year, returns just those observations with unique onsets where duplicates exist. This will not eliminate all duplicates, far
-#' from it, but it's a sensible place to start.
+#' @return \code{whittle_conflicts_onsets()} takes a dyad-year data frame
+#' or leader-dyad-year data frame  with a declared conflict attribute type
+#' and, grouping by the dyad and year, returns just those observations with
+#' unique onsets where duplicates exist. This will not eliminate all
+#' duplicates, far from it, but it's a sensible place to start.
 #'
-#' @details Dyads are capable of having multiple disputes in a given year, which can create a problem
-#' for merging into a complete dyad-year data frame. Consider the case of France and Italy in 1860, which
-#' had three separate dispute onsets that year (MID#0112, MID#0113, MID#0306), as illustrative of the problem.
-#' The default process in \pkg{peacesciencer} employs several rules to whittle down these duplicate dyad-years for
-#' merging into a dyad-year data frame. These are available in \code{add_cow_mids()} and \code{add_gml_mids()}.
+#' @details Dyads are capable of having multiple disputes in a given year,
+#' which can create a problem for merging into a complete dyad-year
+#' data frame. Consider the case of France and Italy in 1860, which
+#' had three separate dispute onsets that year (MID#0112, MID#0113, MID#0306),
+#' as illustrative of the problem. The default process in \pkg{peacesciencer}
+#' employs several rules to whittle down these duplicate dyad-years for
+#' merging into a dyad-year data frame. These are available in
+#' \code{add_cow_mids()} and \code{add_gml_mids()}.
 #'
 #' \code{wc_onsets()} is a simple, less wordy, shortcut for the same function.
 #'
@@ -100,7 +108,43 @@ whittle_conflicts_onsets <- function(data) {
 
 
 
-  } else  {
+  } else if (length(attributes(data)$ps_data_type) > 0 && attributes(data)$ps_data_type == "leader_dyad_year" &&  attributes(data)$ps_conflict_type == "gml") {
+
+    # I want to err on the side of caution and do this merge every time, irregarding if the data are already there.
+    # It won't take much time.
+
+    data[ , c('styear', 'stmon', 'settle', 'fatality', 'mindur', 'maxdur', 'hiact', 'hostlev', 'recip', 'outcome')] <- list(NULL)
+
+    attr_ps_data_type <- attributes(data)$ps_data_type
+    attr_ps_system <- attributes(data)$ps_system
+    attr_ps_conflict_type <- attributes(data)$ps_conflict_type
+
+    data %>%
+      left_join(., gml_mid_disps ) -> hold_this
+
+
+    hold_this %>%
+      group_by(.data$ccode1, .data$obsid1, .data$ccode2, .data$obsid2, .data$year)  %>%
+      mutate(duplicated = ifelse(n() > 1, 1, 0)) %>%
+      # Remove anything that's not a unique MID onset
+      mutate(sddd = sd(.data$gmlmidonset),
+             sddd = ifelse(is.na(.data$sddd), 0, .data$sddd)) %>%
+      mutate(removeme = ifelse(.data$duplicated == 1 & .data$gmlmidonset == 0 & .data$sddd > 0, 1, 0)) %>%
+      filter(.data$removeme != 1) %>%
+      # remove detritus
+      select(-.data$removeme, -.data$sddd) %>%
+      # practice safe group_by()
+      ungroup() -> data
+
+    data[ , c('styear', 'stmon', 'settle', 'fatality', 'mindur', 'maxdur', 'hiact', 'hostlev', 'recip', 'outcome')] <- list(NULL)
+
+    attr(data, "ps_data_type") <- attr_ps_data_type
+    attr(data, "ps_system") <-  attr_ps_system
+    attr(data, "ps_conflict_type") <-  attr_ps_conflict_type
+
+
+
+  } else {
     stop("whittle_conflicts_onsets() doesn't recognize the data supplied to it.")
   }
 

@@ -12,13 +12,14 @@ if(getRversion() >= "2.15.1")
       "ucdp_acd", "cow_mid_dirdisps", "cow_mid_disps", "cow_mid_ddydisps",
       "gml_mid_ddydisps", "td_rivalries", "gw_cow_years", "rugged", "creg",
       "hief", "gwcode_democracy", "cow_war_intra", "cow_war_inter", "cow_trade_ndy",
-      "ps_bib", "gml_mid_disps")
+      "ps_bib", "gml_mid_disps", "lwuf", "gml_part", "LEAD", "gml_mid_ddlydisps", "gml_mid_dirleaderdisps",
+      "false_cow_dyads", "false_gw_dyads", "ps_data_version", "leader_codes")
   )
 
 
 .onAttach <- function(libname, pkgname) {
 
-  remote_files <- c("cow_trade_ddy")
+  remote_files <- c("cow_trade_ddy", "cow_dir_leader_dyad_years", "gw_dir_leader_dyad_years", "dyadic_fp_similarity")
   extdata_dir <- system.file("extdata", package="peacesciencer")
 
   the_files <- paste0(extdata_dir, "/", remote_files, ".rds")

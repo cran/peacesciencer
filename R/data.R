@@ -120,13 +120,25 @@ NULL
 #'
 #' @references
 #'
-#' Coppedge, Michael, John Gerring, Carl Henrik Knutsen, Staffan I. Lindberg, Jan Teorell, David Altman, Michael Bernhard, M. Steven Fish, Adam Glynn, Allen Hicken, Anna Luhrmann, Kyle L. Marquardt, Kelly McMann, Pamela Paxton, Daniel Pemstein, Brigitte Seim, Rachel Sigman, Svend-Erik Skaaning, Jeffrey Staton, Agnes Cornell, Lisa Gastaldi, Haakon Gjerløw, Valeriya Mechkova, Johannes von Römer, Aksel Sundtröm, Eitan Tzelgov, Luca Uberti, Yi-ting Wang, Tore Wig, and Daniel Ziblatt. 2020. ”V-Dem Codebook v10” Varieties of Democracy (V-Dem) Project.
+#' Coppedge, Michael, John Gerring, Carl Henrik Knutsen, Staffan I. Lindberg,
+#' Jan Teorell, David Altman, Michael Bernhard, M. Steven Fish, Adam Glynn,
+#' Allen Hicken, Anna Luhrmann, Kyle L. Marquardt, Kelly McMann, Pamela
+#' Paxton, Daniel Pemstein, Brigitte Seim, Rachel Sigman, Svend-Erik
+#' Skaaning, Jeffrey Staton, Agnes Cornell, Lisa Gastaldi, Haakon Gjerlow,
+#' Valeriya Mechkova, Johannes von Romer, Aksel Sundtrom, Eitan Tzelgov,
+#' Luca Uberti, Yi-ting Wang, Tore Wig, and Daniel Ziblatt. 2020.
+#' "V-Dem Codebook v10" Varieties of Democracy (V-Dem) Project.
 #'
-#' Marshall, Monty G., Ted Robert Gurr, and Keith Jaggers. 2017. "Polity IV Project: Political Regime Characteristics and Transitions, 1800-2017." Center for Systemic Peace.
+#' Marshall, Monty G., Ted Robert Gurr, and Keith Jaggers. 2017.
+#' "Polity IV Project: Political Regime Characteristics and Transitions,
+#' 1800-2017." Center for Systemic Peace.
 #'
-#' Marquez, Xavier, "A Quick Method for Extending the Unified Democracy Scores" (March 23, 2016). \doi{10.2139/ssrn.2753830}
+#' Marquez, Xavier, "A Quick Method for Extending the Unified Democracy
+#' Scores" (March 23, 2016).  \doi{10.2139/ssrn.2753830}
 #'
-#' Pemstein, Daniel, Stephen Meserve, and James Melton. 2010. Democratic Compromise: A Latent Variable Analysis of Ten Measures of Regime Type. Political Analysis 18 (4): 426-449.
+#' Pemstein, Daniel, Stephen Meserve, and James Melton. 2010. "Democratic
+#' Compromise: A Latent Variable Analysis of Ten Measures of Regime Type."
+#' *Political Analysis* 18(4): 426-449.
 #'
 "ccode_democracy"
 
@@ -377,10 +389,22 @@ NULL
 #' \item{\code{enddate}}{the end date in the data}
 #' }
 #'
-#' @details Data originally provided by Gleditsch with no column names. Column names were added before some light re-cleaning in order
-#' to generate these data.
+#' @details
 #'
-#' @references Gleditsch, Kristian S. and Michael D. Ward. 1999. "A Revised List of Independent States since the Congress of Vienna" International Interactions 25(4): 393--413.
+#' Data originally provided by Gleditsch with no column names. Column names
+#' were added before some light re-cleaning in order to generate these data.
+#' "Wuerttemberg" and "Cote D'Ivoire" in the `statename` column needed to be
+#' renamed to ensure maximal compliance with CRAN, which raises notes for
+#' every non-ASCII character that appears in its package. I do not think this
+#' to be problematic at all and, after all, state names should never be
+#' a basis for something like a match or merge you would do in
+#' \pkg{countrycode}.
+#'
+#' @references
+#'
+#' Gleditsch, Kristian S. and Michael D. Ward. 1999. "A Revised List of
+#' Independent States since the Congress of Vienna."
+#' *International Interactions* 25(4): 393--413.
 #'
 "gw_states"
 
@@ -614,7 +638,7 @@ NULL
 #' \item{\code{atop_offense}}{a numeric vector that equals 1 if there was an alliance observed with a offense pledge}
 #' \item{\code{atop_neutral}}{a numeric vector that equals 1 if there was an alliance observed with a neutrality pledge}
 #' \item{\code{atop_nonagg}}{a numeric vector that equals 1 if there was an alliance observed with a non-aggression pledge}
-#' \item{\code{atop_consul}}{a numeric vector that equals 1 if there was an alliance obeserved with a consultation pledge}
+#' \item{\code{atop_consul}}{a numeric vector that equals 1 if there was an alliance observed with a consultation pledge}
 #' }
 #' @details The \code{data-raw} directory on the project's Github shows how the data were processed.
 #'
@@ -632,9 +656,9 @@ NULL
 #' based on these data.  Data are version 4.1.
 #'
 #'
-#' @format A data frame with 3409 observations on the following 10 variables.
+#' @format A data frame with 3409 observations on the following 11 variables.
 #' \describe{
-#' \item{\code{ccode}}{a numeric vector for the Correlates of War state code}
+#' \item{\code{gwcode}}{a numeric vector for the Gleditsch-Ward state code}
 #' \item{\code{obsid}}{a character vector for observation ID}
 #' \item{\code{leadid}}{the unique leader identifier}
 #'  \item{\code{leader}}{the leader name}
@@ -646,21 +670,32 @@ NULL
 #' \item{\code{exit}}{a character vector for the leader's exit type}
 #' \item{\code{exitcode}}{a character vector for more information about the leader's exit type}
 #' }
-#' @details Space considerations mean I can only offer a few columns from the overall data. Archigos data are rich with information. Consult
-#' the raw data available on Hein Goeman's website for more.
+#' @details Space considerations mean I can only offer a few columns from the
+#' overall data. Archigos data are rich with information. Consult the raw data
+#' available on Hein Goeman's website for more.
 #'
-#' To best conform with data requirements on CRAN, a few leader names were renamed if they included irregular
-#' characters (e.g. umlauts or accents). These leaders are "(Juan Orlando) Hernández" (`HON-2014`),
-#' "(Antonio) Saca González" (`SAL-2004`), "Julián Trujillo Largacha" (`COL-1878`), "César Gaviria Trujillo"
-#' (`COL-1990`), "Gabriel García Moreno" (`ECU-1869`), "Marcos A. Morínigo" (`PAR-1894-1`), "Higinio Morínigo" (`PAR-1940`),
-#' "Sebastián Piñera" (`CHL-2010`), "Sauli Niinistö" (`FIN-2012`), "Louis Gerhard De Geer" (`SWD-1876`),
-#' "Stefan Löfven" (`SWD-2014`), "Lars Løkke Rasmussen" (`DEN-2009`, `DEN-2015`), and "Fernando de Araújo"
-#' (`ETM-2008-1`). None of these names contain these special characters in the data here.
+#' To best conform with data requirements on CRAN, a few leader names were
+#' renamed if they included irregular characters (e.g. umlauts or accents).
+#' These leaders, in these particular applications, hav been renamed to "(Juan
+#' Orlando) Hernandez" (`HON-2014`), "(Antonio) Saca Gonzalez" (`SAL-2004`),
+#' "Julian Trujillo Largacha" (`COL-1878`), "Cesar Gaviria Trujillo"
+#' (`COL-1990`), "Gabriel Garcia Moreno" (`ECU-1869`), "Marcos A. Morinigo"
+#' (`PAR-1894-1`), "Higinio Morinigo" (`PAR-1940`), "Sebastian Pinera"
+#' (`CHL-2010`), "Sauli Niinisto" (`FIN-2012`), "Louis Gerhard De Geer"
+#' (`SWD-1876`), "Stefan Lofven" (`SWD-2014`), "Lars Lokke Rasmussen"
+#' (`DEN-2009`, `DEN-2015`), and "Fernando de Araujo" (`ETM-2008-1`). None of
+#' these names contain these special characters in the data here.
+#'
+#' For clarity's sake, I renamed the `ccode` column in the raw data to be
+#' `gwcode`. This is because it may deceive the user peeking into the data
+#' that these are not Correlates of War state codes, but Gleditsch-Ward
+#' state codes.
 #'
 #' @references
 #'
-#' Goemans, Henk E., Kristian Skrede Gleditsch, and Giacomo Chiozza. 2009. "Introducing Archigos: A Dataset of Political Leaders"
-#' \emph{Journal of Peace Research} 46(2): 269--83.
+#' Goemans, Henk E., Kristian Skrede Gleditsch, and Giacomo Chiozza. 2009. "Introducing
+#' Archigos: A Dataset of Political Leaders" \emph{Journal of Peace Research}
+#' 46(2): 269--83.
 #'
 #' @md
 
@@ -686,6 +721,12 @@ NULL
 #' data are ultimately being simulated, a user can expect some slight differences between the Correlates of War version of these data
 #' (which Anders et al. published) and the Gleditsch-Ward version of these data (which appear to be the one the authors will more
 #' vigorously support going forward).
+#'
+#' Space considerations compel me to round these data to three decimal points.  These "economic" data are routinely
+#' the biggest in the package, and it's because of the decimal points. The justification for this is these data are estimated/simulated
+#' anyways and the information loss is at the 1/1000th decimal point. This procedure basically cuts the size of the data to be less than
+#' 25% of its original size. The original simulations are available for remote download if you'd like. Type \code{?download_extdata()} for
+#' more information.
 #'
 #' @references
 #'
@@ -714,6 +755,12 @@ NULL
 #' data are ultimately being simulated, a user can expect some slight differences between the Correlates of War version of these data
 #' (which Anders et al. published) and the Gleditsch-Ward version of these data (which appear to be the one the authors will more
 #' vigorously support going forward).
+#'
+#' Space considerations compel me to round these data to three decimal points.  These "economic" data are routinely
+#' the biggest in the package, and it's because of the decimal points. The justification for this is these data are estimated/simulated
+#' anyways and the information loss is at the 1/1000th decimal point. This procedure basically cuts the size of the data to be less than
+#' 25% of its original size. The original simulations are available for remote download if you'd like. Type \code{?download_extdata()} for
+#' more information.
 #'
 #' @references
 #'
@@ -746,10 +793,10 @@ NULL
 #'
 #' @references
 #'
-#' Gleditsch, Nils Petter; Peter Wallensteen, Mikael Eriksson, Margareta Sollenberg & Håvard Strand (2002)
+#' Gleditsch, Nils Petter; Peter Wallensteen, Mikael Eriksson, Margareta Sollenberg & Havard Strand (2002)
 #' Armed Conflict 1946–2001: A New Dataset. \emph{Journal of Peace Research} 39(5): 615–637.
 #'
-#' Pettersson, Therese; Stina Högbladh & Magnus Öberg (2019). Organized violence, 1989-2018 and peace
+#' Pettersson, Therese; Stina Hogbladh & Magnus Oberg (2019). Organized violence, 1989-2018 and peace
 #' agreements. Journal of Peace Research 56(4): 589-603.
 
 "ucdp_onsets"
@@ -782,10 +829,10 @@ NULL
 #'
 #' @references
 #'
-#' Gleditsch, Nils Petter; Peter Wallensteen, Mikael Eriksson, Margareta Sollenberg & Håvard Strand (2002)
+#' Gleditsch, Nils Petter; Peter Wallensteen, Mikael Eriksson, Margareta Sollenberg & Havard Strand (2002)
 #' Armed Conflict 1946–2001: A New Dataset. \emph{Journal of Peace Research} 39(5): 615–637.
 #'
-#' Pettersson, Therese; Stina Högbladh & Magnus Öberg (2019). Organized violence, 1989-2018 and peace
+#' Pettersson, Therese; Stina Hogbladh & Magnus Oberg (2019). Organized violence, 1989-2018 and peace
 #' agreements. Journal of Peace Research 56(4): 589-603.
 
 "ucdp_acd"
@@ -1190,13 +1237,25 @@ NULL
 #'
 #' @references
 #'
-#' Coppedge, Michael, John Gerring, Carl Henrik Knutsen, Staffan I. Lindberg, Jan Teorell, David Altman, Michael Bernhard, M. Steven Fish, Adam Glynn, Allen Hicken, Anna Luhrmann, Kyle L. Marquardt, Kelly McMann, Pamela Paxton, Daniel Pemstein, Brigitte Seim, Rachel Sigman, Svend-Erik Skaaning, Jeffrey Staton, Agnes Cornell, Lisa Gastaldi, Haakon Gjerløw, Valeriya Mechkova, Johannes von Römer, Aksel Sundtröm, Eitan Tzelgov, Luca Uberti, Yi-ting Wang, Tore Wig, and Daniel Ziblatt. 2020. ”V-Dem Codebook v10” Varieties of Democracy (V-Dem) Project.
+#' Coppedge, Michael, John Gerring, Carl Henrik Knutsen, Staffan I. Lindberg,
+#' Jan Teorell, David Altman, Michael Bernhard, M. Steven Fish, Adam Glynn,
+#' Allen Hicken, Anna Luhrmann, Kyle L. Marquardt, Kelly McMann, Pamela
+#' Paxton, Daniel Pemstein, Brigitte Seim, Rachel Sigman, Svend-Erik
+#' Skaaning, Jeffrey Staton, Agnes Cornell, Lisa Gastaldi, Haakon Gjerlow,
+#' Valeriya Mechkova, Johannes von Romer, Aksel Sundtrom, Eitan Tzelgov,
+#' Luca Uberti, Yi-ting Wang, Tore Wig, and Daniel Ziblatt. 2020.
+#' "V-Dem Codebook v10" Varieties of Democracy (V-Dem) Project.
 #'
-#' Marshall, Monty G., Ted Robert Gurr, and Keith Jaggers. 2017. "Polity IV Project: Political Regime Characteristics and Transitions, 1800-2017." Center for Systemic Peace.
+#' Marshall, Monty G., Ted Robert Gurr, and Keith Jaggers. 2017.
+#' "Polity IV Project: Political Regime Characteristics and Transitions,
+#' 1800-2017." Center for Systemic Peace.
 #'
-#' Marquez, Xavier, "A Quick Method for Extending the Unified Democracy Scores" (March 23, 2016). \doi{10.2139/ssrn.2753830}
+#' Marquez, Xavier, "A Quick Method for Extending the Unified Democracy
+#' Scores" (March 23, 2016).  \doi{10.2139/ssrn.2753830}
 #'
-#' Pemstein, Daniel, Stephen Meserve, and James Melton. 2010. Democratic Compromise: A Latent Variable Analysis of Ten Measures of Regime Type. Political Analysis 18 (4): 426-449.
+#' Pemstein, Daniel, Stephen Meserve, and James Melton. 2010. "Democratic
+#' Compromise: A Latent Variable Analysis of Ten Measures of Regime Type."
+#' *Political Analysis* 18(4): 426-449.
 #'
 "gwcode_democracy"
 
@@ -1230,7 +1289,7 @@ NULL
 #' }
 #'
 #' @details See \code{data-raw} directory for how these data were generated. In the Guinnea-Bissau Civil War (1998, 1999),
-#' the "Mané Junta" were changed to just "Mane Junta" to coincide with CRAN's character requirements.
+#' the "Mane Junta" have the accented-e scrubbed to coincide with CRAN's character requirements.
 #'
 #' @references
 #'
@@ -1292,7 +1351,7 @@ NULL
 #'
 #' This is a \code{BibTeX} file, loaded as a data frame, to assist the user in properly citing the source material that is used in this package.
 #'
-#' @format A data frame with 37 observations on the following 40 variables.
+#' @format A data frame with the following columns.
 #' \describe{
 #' \item{\code{CATEGORY}}{the \code{BibTeX} entry type}
 #' \item{\code{BIBTEXKEY}}{the \code{BibTeX} unique entry key}
@@ -1372,3 +1431,337 @@ NULL
 #'
 
 "gml_mid_disps"
+
+
+#' Leader Willingness to Use Force
+#'
+#' These are the estimates of leader willingness to use force as estimated by Carter and Smith (2020).
+#'
+#'
+#' @format A data frame with 3409 observations on the following 9 variables.
+#' \describe{
+#' \item{\code{obsid}}{an observational ID from \code{archigos}}
+#' \item{\code{theta1_mean}}{the mean simulated M1 theta, as estimated by Carter and Smith (2020)}
+#' \item{\code{theta1_sd}}{the standard deviation of simulated M1 thetas}
+#' \item{\code{theta2_mean}}{the mean simulated M2 theta, as estimated by Carter and Smith (2020)}
+#' \item{\code{theta2_sd}}{the standard deviation of simulated M2 thetas}
+#' \item{\code{theta3_mean}}{the mean simulated M3 theta, as estimated by Carter and Smith (2020)}
+#' \item{\code{theta3_sd}}{the standard deviation of simulated M3 thetas}
+#' \item{\code{theta4_mean}}{the mean simulated M4 theta, as estimated by Carter and Smith (2020)}
+#' \item{\code{theta4_sd}}{the standard deviation of simulated M4 thetas}
+#' }
+#'
+#' @details The letter published by the authors contains more information as to what these thetas refer.
+#' The "M1" theta is a variation of the standard Rasch model from the boilerplate information in the LEAD
+#' data. The authors consider this to be "theoretically relevant" or "risk-related" as these all refer to conflict
+#' or risk-taking. The "M2" theta expands on "M1" by including political orientation and psychological characteristics.
+#' "M3" and "M4" expand on "M1" and "M2" by considering all 36 variables in the LEAD data.
+#'
+#' The authors construct and include all these measures, though their analyses suggest "M2" is the best-performing measure.
+#'
+#' @references
+#'
+#' Carter, Jeff and Charles E. Smith, Jr. 2020. "A Framework for Measuring Leaders' Willingness
+#' to Use Force." \emph{American Political Science Review} 114(4): 1352--1358.
+
+"lwuf"
+
+
+#' Participant Summaries of the GML-MID Data
+#'
+#' These are the participant summaries of the most recent GML-MID data. The data also include leaders at the onset
+#' and conclusion of a participant episode in the GML MID data.
+#'
+#'
+#' @format A data frame with 5217 observations on the following 21 variables.
+#' \describe{
+#' \item{\code{dispnum}}{the dispute ID in the GML MID data}
+#' \item{\code{ccode}}{the Correlates of War code for the participant}
+#' \item{\code{styear}}{the start year for the participant}
+#' \item{\code{stmon}}{the start month for the participant}
+#' \item{\code{stday}}{the start day for the participant}
+#' \item{\code{endyear}}{the end year for the participant}
+#' \item{\code{endmon}}{the end month for the participant}
+#' \item{\code{endday}}{the end day for the participant}
+#' \item{\code{obsid_start}}{an observational ID from \code{archigos} for the leader at the participant onset}
+#' \item{\code{obsid_end}}{an observational ID from \code{archigos} for the leader at the participant conclusion}
+#' \item{\code{dummy_stday}}{a "dummy" start day for the participant. See details for more.}
+#' \item{\code{dummy_endday}}{a "dummy" end day for the participant. See details for more.}
+#' \item{\code{sidea}}{was participant on Side A of the dispute}
+#' \item{\code{hiact}}{highest action for participant in dispute(-episode)}
+#' \item{\code{orig}}{was participant an originator?}
+#' \item{\code{anymiss_leader_start}}{a dummy variable for disputes that equals 1 for a dispute in which *any* participant has a missing leader ID at the start date.}
+#' \item{\code{anymiss_leader_end}}{a dummy variable for disputes that equals 1 for a dispute in which *any* participant has a missing leader ID at the end date.}
+#' \item{\code{allmiss_leader_start}}{a dummy variable for disputes that equals 1 for a dispute in which *all* participants have a missing leader ID at the start date.}
+#' \item{\code{allmiss_leader_end}}{a dummy variable for disputes that equals 1 for a dispute in which *all* participants have a missing leader ID at the end date.}
+#' }
+#'
+#' @details Information about leaders come from Archigos (v. 4.1). GML MID Data are version 2.2.1. The \code{data-raw} directory
+#' contains information about how these data were generated. There is invariably going to be some guesswork here because
+#' dates are sometimes not known with precision. Sometimes, a dispute coincides even with a leadership change when dates are
+#' known with precision. The source script includes a discussion of these cases and shows how the data were generated with all
+#' these caveats in mind.
+#'
+#' Do note that participants can have several episodes within a dispute. Sometimes participants switch sides (e.g. Romania in World War 2).
+#' Sometime participants drop in and out of a long-running dispute (e.g. Syria, prominently, in MID#4182).
+#'
+#' "Dummy" start days and end days are there to serve as a parlor trick in assigning disputes to leaders in leader-level analyses. Where days
+#' are known with precision, the dummy day is that number. In most cases, where the day is not known with precision coincides with a month
+#' that has no leader transition. Thus, the start day that gets imputed is going to be the first of the month (for the dummy start day)
+#' or the last of the month (for the dummy end day). Cases where there was a leader transition (or two) that month may require some more
+#' sensitive imputing. For example, our best guess is Antonio Guzmán Blanco of Venezuela is president for the end of MID#1639, given his
+#' role in trying to negotiate a conclusion to the dispute. Archigos has him leaving office on the 7th, so that's the end day that gets imputed
+#' for him. Again, these are here to serve as a parlor trick in assigning disputes to leaders for leader-level analyses. Be careful about using
+#' these data for calculating dispute-participant duration. In fact: don't do that.
+#'
+#' @references
+#'
+#' Gibler, Douglas M., Steven V. Miller, and Erin K. Little. 2016. “An Analysis of the Militarized
+#' Interstate Dispute (MID) Dataset, 1816-2001.” International Studies Quarterly 60(4): 719-730.
+#'
+#' Goemans, Henk E., Kristian Skrede Gleditsch, and Giacomo Chiozza. 2009. "Introducing Archigos: A Dataset of Political Leaders"
+#' \emph{Journal of Peace Research} 46(2): 269--83.
+
+"gml_part"
+
+#' (An Abbreviation of) The LEAD Data Set
+#'
+#' These are an abbreviated version of the LEAD Data Set, incorporating variables that I think are most interesting
+#' or potentially useful from these data.
+#'
+#'
+#' @format A data frame with 3409 observations on the following 12 variables.
+#' \describe{
+#' \item{\code{obsid}}{an observational ID from \code{archigos}}
+#' \item{\code{leveledu}}{0 = primary, 1 = secondary, 2 = university, 3 = graduate}
+#' \item{\code{milservice}}{did leader have prior military service?}
+#' \item{\code{combat}}{did leader have prior combat experience in military service?}
+#' \item{\code{rebel}}{was leader previously part of a rebel group?}
+#' \item{\code{warwin}}{was leader previously part of a winning war effort as part of military service?}
+#' \item{\code{warloss}}{was leader previously part of a losing war effort as part of military service?}
+#' \item{\code{rebelwin}}{was leader previously part of a winning war effort as part of a rebel group?}
+#' \item{\code{rebelloss}}{was leader previously part of a losing war effort as part of a rebel group?}
+#' \item{\code{yrsexper}}{previous years of experience in politics before becoming a leader}
+#' \item{\code{physhealth}}{does leader have physical health issues?}
+#' \item{\code{mentalhealth}}{does leader have mental health issues?}
+#' }
+#'
+#' @details Data are ported from Ellis et al. (2015). Users who want more of these variables included in \pkg{peacesciencer} should
+#' raise an issue on Github.
+#'
+#' @references
+#'
+#' Ellis, Carli Mortenson, Michael C. Horowitz, and Allan C. Stam. 2015. "Introducing the
+#' LEAD Data Set." \emph{International Interactions} 41(4): 718--741.
+
+"LEAD"
+
+
+
+
+#' Directed Leader-Dyadic Dispute-Year Data with No Duplicate Leader-Dyad-Years (GML, v. 2.2.1, Archigos v. 4.1)
+#'
+#' These are directed leader-dyadic dispute year data derived from the Gibler-Miller-Little (GML) Militarized Interstate
+#'  Dispute (MID) project. Data are from version 2.2.1 (GML-MID) and version 4.1 (Archigos).
+#'  These were whittled to where there is no duplicate dyad-years.
+#'  Its primary aim here is merging into a dyad-year data frame.
+#'
+#'
+#' @format A data frame with 10708 observations on the following 12 variables.
+#' \describe{
+#' \item{\code{dispnum}}{a numeric vector for the dispute number}
+#' \item{\code{ccode1}}{a numeric vector for the focal state in the dyad}
+#' \item{\code{ccode2}}{a numeric vector for the target state in the dyad}
+#' \item{\code{obsid1}}{a character vector for the leader of the focal state in the dyad, if avialable}
+#' \item{\code{obsid2}}{a character vector for the leader of the target state in the dyad, if avialable}
+#' \item{\code{year}}{a numeric vector for the dispute-year}
+#' \item{\code{gmlmidongoing}}{a numeric vector for whether there was a dispute ongoing in that year}
+#' \item{\code{gmlmidonset}}{a numeric vector for whether it was the onset of a new dispute (or new participant-entry into a recurring dispute)}
+#' \item{\code{sidea1}}{is \code{ccode1} on side A of the dispute?}
+#' \item{\code{sidea2}}{is \code{ccode2} on side A of the dispute?}
+#' \item{\code{orig1}}{is \code{ccode1} an originator of the dispute?}
+#' \item{\code{orig2}}{is \code{ccode2} an originator of the dispute?}
+#' \item{\code{obsid_start1}}{the ID of the leader at the dispute onset for \code{ccode1}}
+#' \item{\code{obsid_start2}}{the ID of the leader at the dispute onset for \code{ccode2}}
+#' \item{\code{obsid_end1}}{the ID of the leader at the dispute conclusion for \code{ccode1}}
+#' \item{\code{obsid_end2}}{the ID of the leader at the dispute conclusion for \code{ccode2}}
+#' }
+#'
+#' @details The process of creating these is described at one of the references below. Importantly, these data are somewhat
+#' "naive." That is: they won't tell you, for example, that Brazil and Japan never directly fought each other during World War II.
+#' Instead, it will tell you that there were two years of overlap for the two on different sides of the conflict and that the highest
+#' action for both was a war. The data are thus similar to what the \code{EUGene} program would create for users back in the day. Use these
+#' data with that limitation in mind.
+#'
+#' Data were created by first selecting on unique onsets. Then, where duplicates remained: retaining highest fatality, highest hostility level,
+#'  highest estimated minimum duration, reciprocated observations over unreciprocated observations, and, finally, the lowest start month.
+#'
+#'  Be mindful that Archigos' leader data are nominally denominated in Gleditsch-Ward states, which are standardized to Correlates of War
+#'  state system membership as well as the data can allow. There will be some missing leaders after 1870 because Archigos is ultimately its
+#'  own system.
+#'
+#' @references
+#'
+#' Miller, Steven V. 2021. "How to (Meticulously) Convert Participant-Level Dispute Data to Dyadic Dispute-Year Data in R."
+#' URL: \url{http://svmiller.com/blog/2021/05/convert-cow-mid-data-to-dispute-year/}
+#'
+#' Gibler, Douglas M., Steven V. Miller, and Erin K. Little. 2016. “An Analysis of the Militarized
+#' Interstate Dispute (MID) Dataset, 1816-2001.” International Studies Quarterly 60(4): 719-730.
+#'
+#' Goemans, Henk E., Kristian Skrede Gleditsch, and Giacomo Chiozza. 2009. "Introducing Archigos: A Dataset of Political Leaders"
+#' \emph{Journal of Peace Research} 46(2): 269--83.
+
+"gml_mid_ddlydisps"
+
+
+
+#' Directed Leader-Dyadic Dispute-Year Data (GML, v. 2.2.1, Archigos v. 4.1)
+#'
+#' These are directed leader-dyadic dispute year data derived from the Gibler-Miller-Little (GML) Militarized Interstate
+#'  Dispute (MID) project. Data are from version 2.2.1 (GML-MID) and version 4.1 (Archigos). The data are all relevant
+#'  dyadic leader pairings in conflict, allowing users to employ their own case exclusion rules to the data as they see fit.
+#'
+#'
+#' @format A data frame with 11686 observations on the following 16 variables.
+#' \describe{
+#' \item{\code{dispnum}}{a numeric vector for the dispute number}
+#' \item{\code{ccode1}}{a numeric vector for the focal state in the dyad}
+#' \item{\code{ccode2}}{a numeric vector for the target state in the dyad}
+#' \item{\code{obsid1}}{a character vector for the leader of the focal state in the dyad, if avialable}
+#' \item{\code{obsid2}}{a character vector for the leader of the target state in the dyad, if avialable}
+#' \item{\code{year}}{a numeric vector for the dispute-year}
+#' \item{\code{gmlmidongoing}}{a numeric vector for whether there was a dispute ongoing in that year}
+#' \item{\code{gmlmidonset}}{a numeric vector for whether it was the onset of a new dispute (or new participant-entry into a recurring dispute)}
+#' \item{\code{sidea1}}{is \code{ccode1} on side A of the dispute?}
+#' \item{\code{sidea2}}{is \code{ccode2} on side A of the dispute?}
+#' \item{\code{orig1}}{is \code{ccode1} an originator of the dispute?}
+#' \item{\code{orig2}}{is \code{ccode2} an originator of the dispute?}
+#' \item{\code{obsid_start1}}{the ID of the leader at the dispute onset for \code{ccode1}}
+#' \item{\code{obsid_start2}}{the ID of the leader at the dispute onset for \code{ccode2}}
+#' \item{\code{obsid_end1}}{the ID of the leader at the dispute conclusion for \code{ccode1}}
+#' \item{\code{obsid_end2}}{the ID of the leader at the dispute conclusion for \code{ccode2}}
+#' }
+#'
+#' @details The process of creating these is described at one of the references below. Importantly, these data are somewhat
+#' "naive." That is: they won't tell you, for example, that Brazil and Japan never directly fought each other during World War II.
+#' Instead, it will tell you that there were two years of overlap for the two on different sides of the conflict and that the highest
+#' action for both was a war. The data are thus similar to what the \code{EUGene} program would create for users back in the day. Use these
+#' data with that limitation in mind.
+#'
+#'
+#'  Be mindful that Archigos' leader data are nominally denominated in Gleditsch-Ward states, which are standardized to Correlates of War
+#'  state system membership as well as the data can allow. There will be some missing leaders after 1870 because Archigos is ultimately its
+#'  own system.
+#'
+#' @references
+#'
+#' Miller, Steven V. 2021. "How to (Meticulously) Convert Participant-Level Dispute Data to Dyadic Dispute-Year Data in R."
+#' URL: \url{http://svmiller.com/blog/2021/05/convert-cow-mid-data-to-dispute-year/}
+#'
+#' Gibler, Douglas M., Steven V. Miller, and Erin K. Little. 2016. “An Analysis of the Militarized
+#' Interstate Dispute (MID) Dataset, 1816-2001.” International Studies Quarterly 60(4): 719-730.
+#'
+#' Goemans, Henk E., Kristian Skrede Gleditsch, and Giacomo Chiozza. 2009. "Introducing Archigos: A Dataset of Political Leaders"
+#' \emph{Journal of Peace Research} 46(2): 269--83.
+
+"gml_mid_dirleaderdisps"
+
+
+
+#' The Version Numbers for Data Included in \pkg{peacesciencer}
+#'
+#' This is a simple data set that communicates the version numbers of data included in this package. It's a companion
+#' to the data frame \code{ps_bib}, and other information functions like \code{ps_cite()} and \code{ps_version()}. The latter
+#' uses this data set.
+#'
+#'
+#' @format A data frame the following four variables.
+#' \describe{
+#' \item{\code{category}}{a category for the type of data}
+#' \item{\code{data}}{the name of the particular data source coinciding with the category}
+#' \item{\code{version}}{the version number included in \pkg{peacesciencer} for this data source}
+#' \item{\code{bibtexkey}}{a character key for the \code{BibTeX} key corresponding with an appropriate citation in \code{ps_bib}}
+#' }
+#'
+#' @details
+#'
+#' Version numbers that are years should be understood as data sources with no formal version numbering system, per se. Instead,
+#' they communicate a year of last update. For example, the Correlates of War does not formally version number its state system data
+#' as it does its MID data. Likewise, the Anders et al. (2020) simulations of population and surplus/gross domestic product are not formally
+#' versioned, per se. Instead, the data were published and last updated in 2020.
+
+
+"ps_data_version"
+
+
+#' False Correlates of War Directed Dyad-Years
+#'
+#' This is a simple data set that communicates directed dyads in the Correlates of War data that appear in the same year,
+#' but not in any particular day in the year. They are used in an anti-join in the \code{create_dyadyears()} function in this package.
+#'
+#'
+#' @format A data frame the following four variables.
+#' \describe{
+#' \item{\code{ccode1}}{a numeric vector for the Correlates of War state code for the first state}
+#' \item{\code{ccode2}}{a numeric vector for the Correlates of War state code for the second state}
+#' \item{\code{year}}{a numeric vector for the year}
+#' \item{\code{in_ps}}{a constant that equals 1 if these data would appear in \code{create_dyadyears()} if you were not careful to remove them.}
+#' }
+#'
+#' @details
+#'
+#' Think of the directed Suriname and Republic of Vietnam dyad here as illustrative here. The Republic of Vietnam exits the
+#' Correlates of War state system on April 30, 1975 whereas Suriname enters the state system on November 25, 1975. Both appear in the same
+#' year, but not at the same time.
+#'
+
+"false_cow_dyads"
+
+
+#' False Gleditsch-Ward Directed Dyad-Years
+#'
+#' This is a simple data set that communicates directed dyads in the Gleditsch-Ward data that appear in the same year,
+#' but not in any particular day in the year. They are used in an anti-join in the \code{create_dyadyears()} function in this package.
+#'
+#'
+#' @format A data frame the following four variables.
+#' \describe{
+#' \item{\code{gwcode1}}{a numeric vector for the Gleditsch-Ward state code for the first state}
+#' \item{\code{gwcode2}}{a numeric vector for the Gleditsch-Ward state code for the second state}
+#' \item{\code{year}}{a numeric vector for the year}
+#' \item{\code{in_ps}}{a constant that equals 1 if these data would appear in \code{create_dyadyears()} if you were not careful to remove them.}
+#' }
+#'
+#' @details
+#'
+#' Think of the directed Suriname and Republic of Vietnam dyad here as illustrative here. The Republic of Vietnam exits the
+#' Correlates of War state system on April 30, 1975 whereas Suriname enters the state system on November 25, 1975. Both appear in the same
+#' year, but not at the same time.
+#'
+
+"false_gw_dyads"
+
+
+
+#' A Data Set of Leader Codes Across Archigos 4.1, Archigos 2.9, and the LEAD Data
+#'
+#' This is a simple data set that matches, as well as one can, leader codes across Archigos 4.1, Archigos 2.9, and the LEAD data set.
+#'
+#'
+#' @format A data frame the following four variables.
+#' \describe{
+#' \item{\code{obsid}}{the observation ID in the Archigos data}
+#' \item{\code{leadid}}{the leader ID in version 4.1 of the Archigos data}
+#' \item{\code{leadid29}}{the leader ID in version 2.9 of the Archigos data}
+#' \item{\code{leaderid}}{the leader ID in the LEAD data}
+#' }
+#'
+#' @details
+#'
+#' These data treat version 4.1 of the Archigos data as the gospel leader data (if you will) for which  the observation ID (`obsid`)
+#' is the master code indicating a leader tenure period. It also builds in an assumption that various observations that duplicate in the
+#' LEAD data should not have duplicated. This concerns Francisco Aguilar Barquer (who appears twice), Emile Reuter (who appears twice),
+#' and Gunnar Thoroddsen (who appears three times) in the LEAD data despite having uninterrupted tenures in office. None of the covariates
+#' associated with these leaders change in the LEAD data, which is why I assume they were duplicates.
+
+"leader_codes"
