@@ -108,11 +108,15 @@ These data are directed dyad-years with 17 columns and 1,872,198
 observations. They will almost certainly be the largest data set
 I nudge/ask you to download remotely. The file containing this
 information is 18.6 MB in size. To reduce size further, these
-decimal points have also been rounded to three spots.\tabular{ll}{
+decimal points have also been rounded to three spots.
+
+Haege generated all estimates of dyadic foreign policy similarity, except
+for the \code{taub} column. That was generated separately, by me.\tabular{ll}{
    COLUMN \tab DESCRIPTION \cr
    \code{year} \tab the year \cr
    \code{ccode1} \tab the Correlates of War state code for the first state \cr
    \code{ccode2} \tab the Correlates of War state code for the second state \cr
+   \code{taub} \tab Tau-b (valued alliance data) \cr
    \code{srsvas} \tab unweighted \emph{S} (squared distances, valued alliance data) \cr
    \code{srswvas} \tab weighted \emph{S} (squared distances, valued alliance data) \cr
    \code{srsvaa} \tab unweighted \emph{S} (absolute distances, valued alliance data) \cr

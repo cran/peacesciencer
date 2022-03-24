@@ -434,7 +434,7 @@ NULL
 
 #'  Correlates of War National Military Capabilities Data
 #'
-#' These are version 5.0 of the Correlates of War National Military Capabilities data. Data omit
+#' These are version 6.0 of the Correlates of War National Military Capabilities data. Data omit
 #' the state abbreviation and version identifier for consideration.
 #'
 #' @format A data frame with 15171 observations on the following 9 variables.
@@ -558,8 +558,9 @@ NULL
 #'
 #' @references
 #'
-#' Schvitz, Guy et al. 2021. "Mapping The International System, 1886-2017: The \code{CShapes} 2.0 Dataset."
-#'  \emph{Journal of Conflict Resolution}. \url{https://journals.sagepub.com/doi/full/10.1177/00220027211013563}
+#' Schvitz, Guy, Luc Girardin, Seraina Ruegger, Nils B. Weidmann, Lars-Erik Cederman,
+#' and Kristian Skrede Gleditsch. 2022. "Mapping The International System, 1886-2017:
+#' The \code{CShapes} 2.0 Dataset." \emph{Journal of Conflict Resolution}. 66(1): 144-161.
 #'
 #' Weidmann, Nils B. and Kristian Skrede Gleditsch. 2010. "Mapping and Measuring Country Shapes: The \code{cshapes} Package." \emph{The R Journal} 2(1): 18-24
 
@@ -594,8 +595,9 @@ NULL
 #'
 #' @references
 #'
-#' Schvitz, Guy et al. 2021. "Mapping The International System, 1886-2017: The \code{CShapes} 2.0 Dataset."
-#'  \emph{Journal of Conflict Resolution}. \url{https://journals.sagepub.com/doi/full/10.1177/00220027211013563}
+#' Schvitz, Guy, Luc Girardin, Seraina Ruegger, Nils B. Weidmann, Lars-Erik Cederman,
+#' and Kristian Skrede Gleditsch. 2022. "Mapping The International System, 1886-2017:
+#' The \code{CShapes} 2.0 Dataset." \emph{Journal of Conflict Resolution}. 66(1): 144-161.
 #'
 #' Weidmann, Nils B. and Kristian Skrede Gleditsch. 2010. "Mapping and Measuring Country Shapes: The \code{cshapes} Package." \emph{The R Journal} 2(1): 18-24
 
@@ -1765,3 +1767,31 @@ NULL
 #' associated with these leaders change in the LEAD data, which is why I assume they were duplicates.
 
 "leader_codes"
+
+
+#' Conventional Arms Races During Periods of Rivalry
+#'
+#' This is a simple data set of 71 arms races reported by Gibler et al. in their 2005 article in \emph{Journal of Peace Research}.
+#'
+#'
+#' @format A data frame the following five variables.
+#' \describe{
+#' \item{\code{race_id}}{the arms race identifier}
+#' \item{\code{ccode1}}{a numeric vector for the Correlates of War state code for the first state}
+#' \item{\code{ccode2}}{a numeric vector for the Correlates of War state code for the second state}
+#' \item{\code{styear}}{the start year for the arms race}
+#' \item{\code{endyear}}{the end year for the arms race}
+#' }
+#'
+#' @details
+#'
+#' Data are taken from the appendix of Gibler, Rider, and Hutchison's 2005 article in *Journal of Peace Research*. Read the
+#' article and appendix for more information about coding procedures.
+#'
+#' @references
+#'
+#' Gibler, Douglas M., Toby J. Rider, and Marc L. Hutchison. 2005. "Taking Arms Against
+#' a Sea of Troubles: Conventional Arms Races during Periods of Rivalry"
+#' *Journal of Peace Research* 42(2): 131--47.
+
+"grh_arms_races"

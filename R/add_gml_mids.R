@@ -26,13 +26,13 @@
 #' package.
 #'
 #' Determining "initiation" for state-year summaries of inter-state disputes
-#' since there is an implied directionality of "initiation." In about half
-#' of all cases, this is straightforward. You can use the participant
-#' summaries and determine that if the dispute was bilateral and the dispute
-#' did not escalate beyond an attack, the state on Side A initiated the
-#' dispute. For multilateral MIDs, these conditions still hold at least
-#' for originators. However, there is *considerable* difficulty for cases
-#' where 1) participant-level summaries suggested actions at the level of
+#' is possible since there is an implied directionality of "initiation."
+#' In about half of all cases, this is straightforward. You can use the
+#' participant summaries and determine that if the dispute was bilateral
+#' and the dispute did not escalate beyond an attack, the state on Side A
+#' initiated the dispute. For multilateral MIDs, these conditions still hold
+#' at least for originators. However, there is *considerable* difficulty for
+#' cases where 1) participant-level summaries suggested actions at the level of
 #' clash or higher, 2) the participant was a joiner and not an originator.
 #' The effort required to flesh this out is enormous, and perhaps
 #' forthcoming in a future update.
@@ -166,7 +166,7 @@ add_gml_mids <- function(data, keep, init = "sidea-all-joiners") {
 
 
 
-      message("add_gml_mids() IMPORTANT MESSAGE: By default, this function whittles dispute-year data into dyad-year data by first selecting on unique onsets. Thereafter, where duplicates remain, it whittles dispute-year data into dyad-year data in the following order: 1) retaining highest `fatality`, 2) retaining highest `hostlev`, 3) retaining highest estimated `mindur`, 4) retaining reciprocated over non-reciprocated observations, 5) retaining the observation with the lowest start month, and, where duplicates still remained (and they don't), 6) forcibly dropping all duplicates for observations that are otherwise very similar.\nSee: http://svmiller.com/peacesciencer/articles/coerce-dispute-year-dyad-year.html")
+      message("add_gml_mids() IMPORTANT MESSAGE: By default, this function whittles dispute-year data into dyad-year data by first selecting on unique onsets. Thereafter, where duplicates remain, it whittles dispute-year data into dyad-year data in the following order: 1) retaining highest `fatality`, 2) retaining highest `hostlev`, 3) retaining highest estimated `mindur`, 4) retaining highest estimated `maxdur`, 5) retaining reciprocated over non-reciprocated observations, 6) retaining the observation with the lowest start month, and, where duplicates still remained (and they don't), 7) forcibly dropping all duplicates for observations that are otherwise very similar.\nSee: http://svmiller.com/peacesciencer/articles/coerce-dispute-year-dyad-year.html")
       return(data)
 
     }
