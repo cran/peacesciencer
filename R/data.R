@@ -211,9 +211,11 @@ NULL
 #' This is a complete directed dyad-year data frame of Correlates of War
 #' state system members. I offer it here as a shortcut for various other functions when
 #' I am working on new additions and don't want to invest time in waiting for
-#' \code{create_dyadyears()} to run.
+#' \code{create_dyadyears()} to run. As a general rule, this data frame is
+#' updated after every calendar year to include the most recently concluded
+#' calendar year.
 #'
-#' @format A data frame with 2063670 observations on the following 3 variables.
+#' @format A data frame with the following 3 variables.
 #' \describe{
 #' \item{\code{ccode1}}{a numeric vector for the Correlates of War state code for the first state}
 #' \item{\code{ccode2}}{a numeric vector for the Correlates of War state code for the second state}
@@ -267,7 +269,7 @@ NULL
 #'
 #' @details Data are provided "as-is" with no additional re-cleaning before inclusion into this data set (beyond eliminating the state abbreviation).
 #'
-#' @references Correlates of War Project. 2017. "State System Membership List, v2016." Online, \url{https://correlatesofwar.org/data-sets/state-system-membership}
+#' @references Correlates of War Project. 2017. "State System Membership List, v2016." Online, \url{https://correlatesofwar.org/data-sets/state-system-membership/}
 #'
 "cow_majors"
 
@@ -292,7 +294,7 @@ NULL
 #'
 #' @details Data are provided "as-is" with no additional re-cleaning before inclusion into this data set.
 #'
-#' @references Correlates of War Project. 2017. "State System Membership List, v2016." Online, \url{https://correlatesofwar.org/data-sets/state-system-membership}
+#' @references Correlates of War Project. 2017. "State System Membership List, v2016." Online, \url{https://correlatesofwar.org/data-sets/state-system-membership/}
 #'
 "cow_states"
 
@@ -362,9 +364,11 @@ NULL
 #' A directed dyad-year data frame of Gleditsch-Ward state system members
 #'
 #' This is a complete directed dyad-year data frame of Gleditsch-Ward
-#' state system members. I offer it here as a shortcut for various other functions.
+#' state system members. I offer it here as a shortcut for various other
+#' functions. As a general rule, this data frame is updated after every
+#' calendar year to include the most recently concluded calendar year.
 #'
-#' @format A data frame with 1999558 observations on the following 4 variables.
+#' @format A data frame with the following 3 variables.
 #' \describe{
 #' \item{\code{gwcode1}}{a numeric vector for the Correlates of War state code for the first state}
 #' \item{\code{gwcode2}}{a numeric vector for the Correlates of War state code for the second state}
@@ -539,19 +543,13 @@ NULL
 #' \item{\code{mindist}}{the minimum distance between states on Jan. 1 of the year, in kilometers}
 #' }
 #'
-#' @details The data are generated from the \pkg{cshapes} package. The package authors purport that the data
-#' are generated to be compatible with Correlates of War system codes, but a review I did several years ago for
-#' an unrelated project (published in 2017 in \emph{Conflict Management & Peace Science}, which you should cite for
-#' all your articles if you're reading this) suggested the output does not seem to perfectly meet that billing. These
-#' included oddball cases like Zanzibar, United Arab Republic, Comoros, East Germany, and a few others. Those appear to
-#' be fixed in this version.
-#'
-#' Data are automatically generated (by default) as directed dyad-years. I elect to make them non-directed for space
-#' considerations. Making non-directed dyad-year data into directed dyad-year data isn't too difficult in R. It just
+#' @details The data are generated from the \pkg{cshapes} package. Data are automatically generated
+#' (by default) as directed dyad-years. I elect to make them non-directed for space considerations.
+#' Making non-directed dyad-year data into directed dyad-year data isn't too difficult in R. It just
 #' looks weird to see the code that does it.
 #'
 #' Previous versions of these data were for the minimum distance as of Dec. 31 of the referent year. These are now Jan. 1.
-#' Most of the data I prove elsewhere in this package are  to be understood as the data as they were at the *start* of
+#' Most of the data I provide elsewhere in this package are  to be understood as the data as they were at the *start* of
 #' the year. This is how I process, for example, the \code{capitals} data as they get merged in the \code{add_capital_distance()}
 #' function. However, the script that generates these data are set at Jan. 1 of the year and not Dec. 31. Right now, the \pkg{cshapes}
 #' does not appear to work on my system and I do not know why. Fortunately, the package authors made these data available.
@@ -1795,3 +1793,83 @@ NULL
 #' *Journal of Peace Research* 42(2): 131--47.
 
 "grh_arms_races"
+
+
+#' Thompson et al. (2021) Strategic Rivalries, 1494-2020
+#'
+#' A simple summary of all strategic (inter-state) rivalries from Thompson
+#' et al. (2021). This is a simple spreadsheet entry job (with some light
+#' cleaning) based on information provided from pages 34 to 46 in their
+#' book.
+#'
+#'
+#' @format A data frame with 264 observations on the following 12 variables.
+#' \describe{
+#'\item{\code{tssr_id}}{a numeric vector for the rivalry number}
+#'\item{\code{rivalry}}{a character vector for the rivalry name}
+#'\item{\code{ccode1}}{the Correlates of War state code for the state with the lowest Correlates of War state code in the rivalry}
+#'\item{\code{ccode2}}{the Correlates of War state code for the state with the highest Correlates of War state code in the rivalry}
+#'\item{\code{start}}{a numeric vector for the start year of the rivalry}
+#'\item{\code{end}}{a numeric vector for the end year of the rivalry}
+#'\item{\code{positional}}{a numeric vector that is 1 if Thompson et al. (2021) say the rivalry has a positional element (`NA` otherwise)}
+#'\item{\code{spatial}}{a numeric vector that is 1 if Thompson et al. (2021) say the rivalry has a spatial element (`NA` otherwise)}
+#'\item{\code{ideological}}{a numeric vector that is 1 if Thompson et al. (2021) say the rivalry has an ideological element (`NA` otherwise)}
+#'\item{\code{interventionary}}{a numeric vector that is 1 if Thompson et al. (2021) say the rivalry has an interventionary element (`NA` otherwise)}
+#' \item{\code{principal}}{a numeric vector that is 1 if Thompson et al. (2021) say the rivalry is the primary (principal) rivalry for the rivals (`NA` otherwise)}
+#' \item{\code{aprin}}{a numeric vector that is 1 if Thompson et al. (2021) say this is an asymmetric principal rivalry (`NA` otherwise)}
+#' }
+#' @details Information gathered from chapter 2 of Thompson et al. (2021).
+#' Ongoing rivalries are right-bound at 2020. In several cases, start dates
+#' of 1494 and 1816 originally had a "P" attached to them, indicating they
+#' were ongoing before that particular year. This is captured in the "raw"
+#' spreadsheet included in the "data-raw" directory, though this is adjusted
+#' in this finished data product.
+#'
+#' This file adjusts for what is assuredly two print errors in Thompson et al.
+#' (2021). In print, Thompson et al. (2021) say the Italy-Turkey rivalry
+#' extends from 1884-1843 and say the Mauritania-Morocco rivalry extends
+#' from 1060-1969. They had meant an end year of 1943 in the first case and
+#' a start year of 1960 in the second case. This is fixed in this version.
+#'
+#' Venice never appears in any data set in the Correlates of War ecosystem
+#' of data, but I gave it a country code of 324 for the sake of these data
+#' (and the previous Thompson and Dreyer (2012) version of it). You'll never
+#' use this, but it's worth saying out loud that's what I did.
+#'
+#' Thompson et al. (2021) dedicate their book to expanding on the various
+#' types of rivalry. Users who know the Thompson and Dreyer (2012) version
+#' will see a few differences here. First, rivalries no longer have formal
+#' primary, secondary, or tertiary types. Instead, rivalries have
+#' there/not there markers for whether a particular element of a rivalry type
+#' is present in the rivalry. From what I've read so far of Thompson et al.
+#' (2021), along with their ordering of the information in Chapter 2, it reads
+#' like they've just made informal what was otherwise a more formal classification
+#' component to the Thompson and Dreyer (2012) rivalry data. Positional rivalries
+#' seem to be an informal "type 1" as Thompson et al. (2021) discuss it, not
+#' at all dissimilar to how the classic alliance scholarship treats defense as
+#' a "type 1" pledge. No matter, this book is already more explicit that
+#' positional and spatial rivalries are clearly different from ideological
+#' and interventionary rivalries, and certainly the interventionary rivalries.
+#'
+#' "Principal" and "asymmetric principal" rivalries are a new classification in
+#' Thompson et al. (2021), relative to Thompson and Dreyer (2012). "Principal"
+#' rivalries exist where 1) the two rivals have no other rivalry or 2) the two
+#' rivals elevate this rivalry as their primary rivalry among other rivalries.
+#' Asymmetric principal rivalries are when only one of the two rivals sees the
+#' other as its primary rival. Consider two U.S.-Russian rivalries as
+#' illustrative. Tge rivalry with the Soviet Union (`tssr_id = 100`) was
+#' the primary rivalry for the U.S. (and the Soviet Union). However, the U.S.
+#' presently sees China as its main rival (`tssr_id = 211`). The ongoing
+#' rivalry with Russia (`tssr_id = 246`) is one where Russia sees the U.S.
+#' as its primary rival but the U.S. does not see Russia the same way.
+#'
+#' @references
+#'
+#' Miller, Steven V. 2019. "Create and Extend Strategic (International) Rivalry Data in R".
+#' URL: \url{http://svmiller.com/blog/2019/10/create-extend-strategic-rivalry-data-r/}
+#'
+#' Thompson, William R., Kentaro Sakuwa, and Prashant Hosur Suhas. 2021.
+#' *Analyzing Strategic Rivalries in World Politics: Types of Rivalry,
+#' Regional Variation, and Escalation/De-escalation*. Springer.
+#'
+"tss_rivalries"
